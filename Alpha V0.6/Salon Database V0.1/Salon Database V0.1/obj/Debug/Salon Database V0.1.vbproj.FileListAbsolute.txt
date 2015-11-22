@@ -1,0 +1,89 @@
+C:\Users\Gleb\AppData\Local\Temporary Projects\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe.config
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe.config
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbprojResolveAssemblyReference.cache
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.Resources.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbproj.GenerateResource.Cache
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomer.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.1\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomerEdit.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe.config
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbprojResolveAssemblyReference.cache
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomer.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomerEdit.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.Resources.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.2\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbproj.GenerateResource.Cache
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe.config
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbprojResolveAssemblyReference.cache
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomer.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomerEdit.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.Resources.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbproj.GenerateResource.Cache
+D:\A2 Comp\Project\Salon System\Alpha V0.3\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmError.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe.config
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbprojResolveAssemblyReference.cache
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomer.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomerEdit.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmError.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.Resources.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbproj.GenerateResource.Cache
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmUnsavedAlert.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.4\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmService.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe.config
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbprojResolveAssemblyReference.cache
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmService.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmServiceEdit.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmUnsavedAlert.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomer.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomerEdit.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmError.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.Resources.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbproj.GenerateResource.Cache
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmAppointment.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.5\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmAppointmentEdit.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe.config
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.pdb
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.xml
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbprojResolveAssemblyReference.cache
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmAppointment.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmAppointmentEdit.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmService.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmServiceEdit.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmUnsavedAlert.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomer.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomerEdit.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmError.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.Resources.resources
+D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbproj.GenerateResource.Cache
