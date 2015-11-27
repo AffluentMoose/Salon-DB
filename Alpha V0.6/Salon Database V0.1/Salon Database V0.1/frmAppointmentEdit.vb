@@ -52,7 +52,7 @@ Public Class frmAppointmentEdit
 
     Private Sub ReadRecord()
 
-        Dim ServiceID As Integer
+        Dim ServiceName As String
 
         FileGet(3, AppointmentRecord, CInt(lblCurrentRecord.Text))
 
@@ -62,13 +62,13 @@ Public Class frmAppointmentEdit
 
             If AppSerRecord.AppID = AppointmentRecord.ID Then
 
-                ServiceID = AppSerRecord.ServiceID
+                ServiceName = AppSerRecord.ServiceName
 
                 For j = 1 To LOF(2) / Len(ServiceRecord)
 
                     FileGet(2, ServiceRecord, j)
 
-                    If ServiceRecord.ID = ServiceID Then
+                    If ServiceRecord.Name = ServiceName Then
 
                         Select Case AppSerRecord.RecordNumber
                             Case 1
@@ -109,52 +109,70 @@ Public Class frmAppointmentEdit
 
     Private Sub SaveService(ByVal ServiceName As String, ByVal RecordNumber As Integer, ByVal AppointmentID As Integer)
 
-        Dim DuplicateFound As Boolean = False 'whether saving this record into a new slot would create a duplicate 
-        Dim ServiceID As Integer
+        Dim DeleteService As Boolean = False
+        Dim RecordSaved As Boolean = False
+        Dim CurrentRNum As Integer = 0 'Re
 
-        For i = 1 To LOF(2) / Len(ServiceRecord)
-
-            FileGet(2, ServiceRecord, i)
-
-            If Trim(ServiceName) = Trim(ServiceRecord.Name) Then
-                ServiceID = ServiceRecord.ID
-                Exit For
-            End If
-
-        Next
+        If ServiceName = "" Then
+            DeleteService = True
+        End If
 
         If LOF(4) / Len(AppSerRecord) <> 0 Then
 
-            DuplicateFound = False
+            For i = 1 To LOF(4) / Len(AppSerRecord)
+                FileGet(4, AppSerRecord, i)
+                CurrentRNum = i
 
-            For j = 1 To LOF(4) / Len(AppSerRecord)
+                If AppSerRecord.AppID = AppointmentID Then
 
-                FileGet(4, AppSerRecord, j)
+                    If Trim(AppSerRecord.ServiceName) = ServiceName Then
 
-                If AppSerRecord.ServiceID = ServiceID And AppSerRecord.AppID = AppointmentID Then
-                    DuplicateFound = True
-                    Exit For
+                        If AppSerRecord.RecordNumber <> RecordNumber Then
+                            AppSerRecord.RecordNumber = RecordNumber
+                            FilePut(4, AppSerRecord, CurrentRNum)
+                        End If
+                        RecordSaved = True
+                        Exit For
+
+                    ElseIf AppSerRecord.RecordNumber = RecordNumber
+
+                        If DeleteService = False Then
+                            AppSerRecord.ServiceName = ServiceName
+                            FilePut(4, AppSerRecord, CurrentRNum)
+                            RecordSaved = True
+                            Exit For
+                        Else
+                            '      DELETE THE FOUND RECORD
+                            '------------------------------------
+                            AppSerRecord.ServiceName = "DELETED"
+                            FilePut(4, AppSerRecord, CurrentRNum)
+                            '------------------------------------
+                            RecordSaved = True
+                            Exit For
+                        End If
+
+                    End If
+
                 End If
 
             Next
 
-            If DuplicateFound = False Then
-
+            If RecordSaved = False Then
                 With AppSerRecord
                     .AppID = AppointmentID
-                    .ServiceID = ServiceID
+                    .ServiceName = ServiceName
                     .RecordNumber = RecordNumber
                 End With
 
                 FilePut(4, AppSerRecord, MaxAppServiceRecordNumber)
                 MaxAppServiceRecordNumber += 1
-
             End If
+
         Else
 
             With AppSerRecord
                 .AppID = AppointmentID
-                .ServiceID = ServiceID
+                .ServiceName = ServiceName
                 .RecordNumber = RecordNumber
             End With
 
@@ -169,19 +187,13 @@ Public Class frmAppointmentEdit
 
         CleanUpBoxes()
 
-        SaveService(cboService1.Text, 1, CInt(lblRecordID.Text))
+        SaveService(Trim(cboService1.Text), 1, CInt(lblRecordID.Text))
 
-        If cboService2.SelectedIndex <> -1 Then
-            SaveService(cboService2.Text, 2, CInt(lblRecordID.Text))
-        End If
+        SaveService(Trim(cboService2.Text), 2, CInt(lblRecordID.Text))
 
-        If cboService3.SelectedIndex <> -1 Then
-            SaveService(cboService3.Text, 3, CInt(lblRecordID.Text))
-        End If
+        SaveService(Trim(cboService3.Text), 3, CInt(lblRecordID.Text))
 
-        If cboService4.SelectedIndex <> -1 Then
-            SaveService(cboService4.Text, 4, CInt(lblRecordID.Text))
-        End If
+        SaveService(Trim(cboService4.Text), 4, CInt(lblRecordID.Text))
 
         With AppointmentRecord 'write into record
             .ID = lblRecordID.Text

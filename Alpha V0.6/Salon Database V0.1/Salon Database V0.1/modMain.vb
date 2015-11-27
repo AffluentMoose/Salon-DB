@@ -10,7 +10,7 @@ Module modMain
         <VBFixedString(14)> Dim Telephone As String
         <VBFixedString(20)> Dim Address1 As String
         <VBFixedString(7)> Dim Address2 As String
-        <VBFixedString(20)> Dim Email As String
+        <VBFixedString(40)> Dim Email As String
     End Structure
 
     Public CustomerRecord As Customer
@@ -48,7 +48,7 @@ Module modMain
 
     Public Structure AppService
         Dim AppID As Integer
-        Dim ServiceID As Integer
+        <VBFixedString(20)> Dim ServiceName As String
         Dim RecordNumber As Integer 'Number 1-4 representing the combo box from which this record has been saved - used for overwriting records
     End Structure
 

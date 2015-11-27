@@ -87,3 +87,21 @@ D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0
 D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmError.resources
 D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.Resources.resources
 D:\A2 Comp\Project\Salon System\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbproj.GenerateResource.Cache
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe.config
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.exe
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.xml
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.pdb
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbprojResolveAssemblyReference.cache
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmAppointment.resources
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmAppointmentEdit.resources
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmService.resources
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmServiceEdit.resources
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmUnsavedAlert.resources
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomer.resources
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmCustomerEdit.resources
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.frmError.resources
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon_Database_V0._1.Resources.resources
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\obj\Debug\Salon Database V0.1.vbproj.GenerateResource.Cache
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.exe
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.pdb
+C:\Users\Gleb\Documents\GitHub\Salon-DB\Alpha V0.6\Salon Database V0.1\Salon Database V0.1\bin\Debug\Salon Database V0.1.xml
