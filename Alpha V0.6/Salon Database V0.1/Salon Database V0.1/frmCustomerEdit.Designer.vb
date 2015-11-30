@@ -246,7 +246,7 @@ Partial Class frmCustomerEdit
         Me.txtEmail.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtEmail.ForeColor = System.Drawing.SystemColors.Info
         Me.txtEmail.Location = New System.Drawing.Point(162, 90)
-        Me.txtEmail.MaxLength = 20
+        Me.txtEmail.MaxLength = 40
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.Size = New System.Drawing.Size(244, 27)
         Me.txtEmail.TabIndex = 31
@@ -269,7 +269,7 @@ Partial Class frmCustomerEdit
         Me.txtAddress1.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress1.ForeColor = System.Drawing.SystemColors.Info
         Me.txtAddress1.Location = New System.Drawing.Point(162, 16)
-        Me.txtAddress1.MaxLength = 20
+        Me.txtAddress1.MaxLength = 25
         Me.txtAddress1.Name = "txtAddress1"
         Me.txtAddress1.Size = New System.Drawing.Size(244, 27)
         Me.txtAddress1.TabIndex = 23
@@ -303,7 +303,7 @@ Partial Class frmCustomerEdit
         Me.txtAddress2.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress2.ForeColor = System.Drawing.SystemColors.Info
         Me.txtAddress2.Location = New System.Drawing.Point(162, 53)
-        Me.txtAddress2.MaxLength = 7
+        Me.txtAddress2.MaxLength = 25
         Me.txtAddress2.Name = "txtAddress2"
         Me.txtAddress2.Size = New System.Drawing.Size(244, 27)
         Me.txtAddress2.TabIndex = 27

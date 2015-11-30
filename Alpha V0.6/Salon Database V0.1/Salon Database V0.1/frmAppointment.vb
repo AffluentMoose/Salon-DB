@@ -28,6 +28,8 @@ Public Class frmAppointment
 
         lstRecords.SelectedIndex = 0
 
+        cboSearch.SelectedIndex = 0
+
     End Sub
 
     Private Sub DisplayRecords(SearchType As Char, SearchString As String) 'takes in 2 parameters for searching records
@@ -49,11 +51,19 @@ Public Class frmAppointment
                 Select Case SearchType
                     Case "n"
 
-                        'Dim NameString As String = AppointmentRecord.ID FIX IT
+                        Dim SearchedString As String = AppointmentRecord.CustomerName
 
-                        'If NameString.ToLower.Contains(SearchString.ToLower) Then
-                        DisplayCurrentRecord(i)
-                    'End If
+                        If SearchedString.ToLower.Contains(SearchString.ToLower) Then
+                            DisplayCurrentRecord(i)
+                        End If
+
+                    Case "d"
+
+                        Dim SearchedString As String = AppointmentRecord.AppDate
+
+                        If SearchedString.ToLower.Contains(SearchString.ToLower) Then
+                            DisplayCurrentRecord(i)
+                        End If
 
                     Case Else
                         DisplayCurrentRecord(i)
@@ -208,6 +218,7 @@ Public Class frmAppointment
 
     Private Sub btnCancelSearch_Click(sender As Object, e As EventArgs) Handles btnCancelSearch.Click
         txtSearchItem.Text = ""
+        txtSearchItem.Focus()
     End Sub
 
     Private Sub txtSearchItem_TextChanged(sender As Object, e As EventArgs) Handles txtSearchItem.TextChanged
@@ -226,10 +237,8 @@ Public Class frmAppointment
 
                 Case "Search Name"
                     DisplayRecords("n", SearchString)
-                Case "Search Telephone"
-                    DisplayRecords("t", SearchString)
-                Case "Search Email"
-                    DisplayRecords("e", SearchString)
+                Case "Search Date"
+                    DisplayRecords("d", SearchString)
 
             End Select
 
@@ -270,6 +279,17 @@ Public Class frmAppointment
         frmCustomer.Show()
         FileClose(3)
         Me.Close()
+    End Sub
+
+    Private Sub lblLen_Click(sender As Object, e As EventArgs) Handles lblLen.Click
+        FileOpen(4, AppServFilePath, OpenMode.Random, , , Len(AppSerRecord))
+        lblLen.Text = "Records in AppSer File: " & LOF(4) / Len(AppSerRecord)
+        FileClose(4)
+    End Sub
+
+    Private Sub cboSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearch.SelectedIndexChanged
+        txtSearchItem.Text = ""
+        txtSearchItem.Focus()
     End Sub
 
 End Class

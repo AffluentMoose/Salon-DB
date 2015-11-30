@@ -92,6 +92,7 @@ Public Class frmAppointmentEdit
         Next
 
         With AppointmentRecord
+
             lblRecordID.Text = .ID
             dtpDate.Text = .AppDate
             dtpTime.Text = .AppTime
@@ -105,13 +106,15 @@ Public Class frmAppointmentEdit
 
         End With
 
+        CleanUpBoxes()
+
     End Sub
 
     Private Sub SaveService(ByVal ServiceName As String, ByVal RecordNumber As Integer, ByVal AppointmentID As Integer)
 
         Dim DeleteService As Boolean = False
         Dim RecordSaved As Boolean = False
-        Dim CurrentRNum As Integer = 0 'Re
+        Dim CurrentRNum As Integer = 0
 
         If ServiceName = "" Then
             DeleteService = True
@@ -130,9 +133,12 @@ Public Class frmAppointmentEdit
                         If AppSerRecord.RecordNumber <> RecordNumber Then
                             AppSerRecord.RecordNumber = RecordNumber
                             FilePut(4, AppSerRecord, CurrentRNum)
+                            RecordSaved = True
+                            Exit For
+                        Else
+                            RecordSaved = True
+                            Exit For
                         End If
-                        RecordSaved = True
-                        Exit For
 
                     ElseIf AppSerRecord.RecordNumber = RecordNumber
 
@@ -312,26 +318,40 @@ Public Class frmAppointmentEdit
 
     Private Sub CleanUpBoxes()
 
-        If cboService4.SelectedIndex <> -1 Then
-            If cboService3.SelectedIndex = -1 Then
-                cboService3.SelectedIndex = cboService4.SelectedIndex
-                cboService4.SelectedIndex = -1
-            End If
+        If cboService2.SelectedIndex = cboService1.SelectedIndex Or cboService2.SelectedIndex = cboService3.SelectedIndex Or cboService2.SelectedIndex = cboService4.SelectedIndex Then
+            cboService2.SelectedIndex = -1
         End If
 
-        If cboService3.SelectedIndex <> -1 Then
-            If cboService2.SelectedIndex = -1 Then
-                cboService2.SelectedIndex = cboService3.SelectedIndex
-                cboService3.SelectedIndex = -1
-            End If
+        If cboService3.SelectedIndex = cboService1.SelectedIndex Or cboService3.SelectedIndex = cboService2.SelectedIndex Or cboService3.SelectedIndex = cboService4.SelectedIndex Then
+            cboService3.SelectedIndex = -1
         End If
 
-        If cboService4.SelectedIndex <> -1 Then
-            If cboService3.SelectedIndex = -1 Then
-                cboService3.SelectedIndex = cboService4.SelectedIndex
-                cboService4.SelectedIndex = -1
-            End If
+        If cboService4.SelectedIndex = cboService1.SelectedIndex Or cboService4.SelectedIndex = cboService2.SelectedIndex Or cboService4.SelectedIndex = cboService3.SelectedIndex Then
+            cboService4.SelectedIndex = -1
         End If
+
+        For i = 1 To 3
+            If cboService4.SelectedIndex <> -1 Then
+                If cboService3.SelectedIndex = -1 Then
+                    cboService3.SelectedIndex = cboService4.SelectedIndex
+                    cboService4.SelectedIndex = -1
+                End If
+            End If
+
+            If cboService3.SelectedIndex <> -1 Then
+                If cboService2.SelectedIndex = -1 Then
+                    cboService2.SelectedIndex = cboService3.SelectedIndex
+                    cboService3.SelectedIndex = -1
+                End If
+            End If
+
+            If cboService2.SelectedIndex <> -1 Then
+                If cboService1.SelectedIndex = -1 Then
+                    cboService1.SelectedIndex = cboService2.SelectedIndex
+                    cboService2.SelectedIndex = -1
+                End If
+            End If
+        Next
 
     End Sub
 

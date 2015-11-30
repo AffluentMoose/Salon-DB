@@ -8,9 +8,10 @@ Module modMain
         <VBFixedString(20)> Dim Forename As String
         <VBFixedString(20)> Dim Surname As String
         <VBFixedString(14)> Dim Telephone As String
-        <VBFixedString(20)> Dim Address1 As String
-        <VBFixedString(7)> Dim Address2 As String
+        <VBFixedString(25)> Dim Address1 As String
+        <VBFixedString(25)> Dim Address2 As String
         <VBFixedString(40)> Dim Email As String
+        <VBFixedString(1)> Dim Deleted As Short
     End Structure
 
     Public CustomerRecord As Customer
@@ -20,7 +21,6 @@ Module modMain
     Public CustMaxID As Integer 'highest ID number for customers
 
     Public Structure Service
-        Dim ID As Integer
         <VBFixedString(20)> Dim Name As String
         <VBFixedString(70)> Dim Description As String
         Dim Price As Decimal
@@ -47,9 +47,9 @@ Module modMain
     Public AppMaxID As Integer 'highest ID number for customers
 
     Public Structure AppService
-        Dim AppID As Integer
+        <VBFixedString(6)> Dim AppID As Integer
         <VBFixedString(20)> Dim ServiceName As String
-        Dim RecordNumber As Integer 'Number 1-4 representing the combo box from which this record has been saved - used for overwriting records
+        <VBFixedString(1)> Dim RecordNumber As Integer 'Number 1-4 representing the combo box from which this record has been saved - used for overwriting records
     End Structure
 
     Public MaxAppServiceRecordNumber As Integer

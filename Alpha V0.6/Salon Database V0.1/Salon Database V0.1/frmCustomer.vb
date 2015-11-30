@@ -28,6 +28,8 @@ Public Class frmCustomer
 
         lstRecords.SelectedIndex = 0
 
+        cboSearch.SelectedIndex = 0
+
     End Sub
 
     Private Sub DisplayRecords(SearchType As Char, SearchString As String) 'takes in 2 parameters for searching records
@@ -49,9 +51,25 @@ Public Class frmCustomer
                 Select Case SearchType
                     Case "n"
 
-                        Dim NameString As String = CustomerRecord.Forename & CustomerRecord.Surname
+                        Dim SearchedString As String = CustomerRecord.Forename & CustomerRecord.Surname
 
-                        If NameString.ToLower.Contains(SearchString.ToLower) Then
+                        If SearchedString.ToLower.Contains(SearchString.ToLower) Then
+                            DisplayCurrentRecord(i)
+                        End If
+
+                    Case "t"
+
+                        Dim SearchedString As String = CustomerRecord.Telephone
+
+                        If SearchedString.ToLower.Contains(SearchString.ToLower) Then
+                            DisplayCurrentRecord(i)
+                        End If
+
+                    Case "e"
+
+                        Dim SearchedString As String = CustomerRecord.Email
+
+                        If SearchedString.ToLower.Contains(SearchString.ToLower) Then
                             DisplayCurrentRecord(i)
                         End If
 
@@ -59,7 +77,6 @@ Public Class frmCustomer
                         DisplayCurrentRecord(i)
 
                 End Select
-
 
             Next i
 
@@ -70,7 +87,7 @@ Public Class frmCustomer
     End Sub
 
     Private Sub DisplayCurrentRecord(ByVal i As Integer)
-        lstRecords.Items.Add(" " & i.ToString("D3") & Space(4) & CustomerRecord.Forename & " " & CustomerRecord.Surname & " " & CustomerRecord.Telephone & " " & CustomerRecord.Address1 & " " & CustomerRecord.Address2 & Space(6) & CustomerRecord.Email)
+        lstRecords.Items.Add(" " & i.ToString("D3") & Space(4) & CustomerRecord.Forename & " " & CustomerRecord.Surname & " " & CustomerRecord.Telephone & "  " & CustomerRecord.Email)
     End Sub
 
     Private Sub ReadRecord()
@@ -118,6 +135,13 @@ Public Class frmCustomer
 
         txtSearchItem.Text = ""
         UpdateRecords()
+
+    End Sub
+
+    Private Sub MarkDeleted()
+
+        CustomerRecord.Deleted = 1
+        FilePut(1, CustomerRecord, CInt(lblCurrentRecord.Text))
 
     End Sub
 
@@ -200,7 +224,8 @@ Public Class frmCustomer
         ElseIf ReturnAction = "delete"
 
             ReturnAction = ""
-            DeleteRecord()
+            MarkDeleted()
+            DisplayRecords("x", "")
 
         End If
 
@@ -208,6 +233,7 @@ Public Class frmCustomer
 
     Private Sub btnCancelSearch_Click(sender As Object, e As EventArgs) Handles btnCancelSearch.Click
         txtSearchItem.Text = ""
+        txtSearchItem.Focus()
     End Sub
 
     Private Sub txtSearchItem_TextChanged(sender As Object, e As EventArgs) Handles txtSearchItem.TextChanged
@@ -267,9 +293,22 @@ Public Class frmCustomer
     End Sub
 
     Private Sub btnAppointmentForm_Click(sender As Object, e As EventArgs) Handles btnAppointmentForm.Click
-        frmAppointment.Show()
-        FileClose(1)
-        Me.Close()
+
+        FileOpen(2, ServiceFilePath, OpenMode.Random, , , Len(ServiceRecord))
+
+        If LOF(1) / Len(CustomerRecord) <> 0 And LOF(2) / Len(ServiceRecord) <> 0 Then
+            frmAppointment.Show()
+            FileClose(1)
+            Me.Close()
+        End If
+
+        FileClose(2)
+
+    End Sub
+
+    Private Sub cboSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearch.SelectedIndexChanged
+        txtSearchItem.Text = ""
+        txtSearchItem.Focus()
     End Sub
 
 End Class

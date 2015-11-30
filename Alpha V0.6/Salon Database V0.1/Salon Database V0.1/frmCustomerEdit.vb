@@ -25,12 +25,12 @@ Public Class frmCustomerEdit
 
         With CustomerRecord
             lblRecordID.Text = .ID
-            txtForename.Text = .Forename
-            txtSurname.Text = .Surname
-            txtTelephone.Text = .Telephone
-            txtAddress1.Text = .Address1
-            txtAddress2.Text = .Address2
-            txtEmail.Text = .Email
+            txtForename.Text = Trim(.Forename)
+            txtSurname.Text = Trim(.Surname)
+            txtTelephone.Text = Trim(.Telephone)
+            txtAddress1.Text = Trim(.Address1)
+            txtAddress2.Text = Trim(.Address2)
+            txtEmail.Text = Trim(.Email)
         End With
 
     End Sub

@@ -28,6 +28,8 @@ Public Class frmService
 
         lstRecords.SelectedIndex = 0
 
+        cboSearch.SelectedIndex = 0
+
     End Sub
 
     Private Sub DisplayRecords(SearchType As Char, SearchString As String) 'takes in 2 parameters for searching records
@@ -208,6 +210,7 @@ Public Class frmService
 
     Private Sub btnCancelSearch_Click(sender As Object, e As EventArgs) Handles btnCancelSearch.Click
         txtSearchItem.Text = ""
+        txtSearchItem.Focus()
     End Sub
 
     Private Sub txtSearchItem_TextChanged(sender As Object, e As EventArgs) Handles txtSearchItem.TextChanged
@@ -226,10 +229,6 @@ Public Class frmService
 
                 Case "Search Name"
                     DisplayRecords("n", SearchString)
-                Case "Search Telephone"
-                    DisplayRecords("t", SearchString)
-                Case "Search Email"
-                    DisplayRecords("e", SearchString)
 
             End Select
 
@@ -267,9 +266,22 @@ Public Class frmService
     End Sub
 
     Private Sub btnAppointmentForm_Click(sender As Object, e As EventArgs) Handles btnAppointmentForm.Click
-        frmAppointment.Show()
-        FileClose(2)
-        Me.Close()
+
+        FileOpen(1, CustomerFilePath, OpenMode.Random, , , Len(CustomerRecord))
+
+        If LOF(1) / Len(CustomerRecord) <> 0 And LOF(2) / Len(ServiceRecord) <> 0 Then
+            frmAppointment.Show()
+            FileClose(2)
+            Me.Close()
+        End If
+
+        FileClose(1)
+
+    End Sub
+
+    Private Sub cboSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearch.SelectedIndexChanged
+        txtSearchItem.Text = ""
+        txtSearchItem.Focus()
     End Sub
 
 End Class

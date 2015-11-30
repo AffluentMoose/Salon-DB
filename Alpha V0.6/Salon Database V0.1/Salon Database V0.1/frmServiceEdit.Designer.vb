@@ -24,8 +24,6 @@ Partial Class frmServiceEdit
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmServiceEdit))
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.lblRecordID = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -47,8 +45,6 @@ Partial Class frmServiceEdit
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.lblRecordID)
-        Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label13)
         Me.Panel1.Controls.Add(Me.btnCancel)
         Me.Panel1.Controls.Add(Me.Label12)
@@ -60,29 +56,6 @@ Partial Class frmServiceEdit
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(652, 287)
         Me.Panel1.TabIndex = 1
-        '
-        'lblRecordID
-        '
-        Me.lblRecordID.AutoSize = True
-        Me.lblRecordID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblRecordID.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRecordID.ForeColor = System.Drawing.Color.White
-        Me.lblRecordID.Location = New System.Drawing.Point(341, 26)
-        Me.lblRecordID.Name = "lblRecordID"
-        Me.lblRecordID.Size = New System.Drawing.Size(20, 21)
-        Me.lblRecordID.TabIndex = 85
-        Me.lblRecordID.Text = "0"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(255, 26)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(82, 19)
-        Me.Label5.TabIndex = 84
-        Me.Label5.Text = "Service ID"
         '
         'Label13
         '
@@ -261,8 +234,6 @@ Partial Class frmServiceEdit
     End Sub
 
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents lblRecordID As Label
-    Friend WithEvents Label5 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents btnCancel As Button
     Friend WithEvents Label12 As Label

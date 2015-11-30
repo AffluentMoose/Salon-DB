@@ -13,7 +13,6 @@ Public Class frmServiceEdit
         Else
 
             lblCurrentRecord.Text = LOF(2) / Len(ServiceRecord) + 1
-            lblRecordID.Text = ServiceMaxID + 1
 
         End If
 
@@ -24,10 +23,9 @@ Public Class frmServiceEdit
         FileGet(2, ServiceRecord, CInt(lblCurrentRecord.Text))
 
         With ServiceRecord
-            lblRecordID.Text = .ID
-            txtName.Text = .Name
-            txtDescription.Text = .Description
-            numPrice.Value = .Price
+            txtName.Text = Trim(.Name)
+            txtDescription.Text = Trim(.Description)
+            numPrice.Value = Trim(.Price)
         End With
 
     End Sub
@@ -51,20 +49,10 @@ Public Class frmServiceEdit
         If InvalidData = False Then
 
             With ServiceRecord 'write into record
-                .ID = lblRecordID.Text
                 .Name = txtName.Text
                 .Description = txtDescription.Text
                 .Price = Math.Round(numPrice.Value, 2, MidpointRounding.AwayFromZero)
             End With
-
-            If Editing = False Then
-
-                ServiceMaxID += 1
-                Using Swriter As StreamWriter = New StreamWriter(IDFileName)
-                    Swriter.WriteLine(ServiceMaxID)
-                End Using
-
-            End If
 
             FilePut(2, ServiceRecord, CInt(lblCurrentRecord.Text)) 'Save the record
 

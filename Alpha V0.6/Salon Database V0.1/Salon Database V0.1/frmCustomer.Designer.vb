@@ -26,8 +26,6 @@ Partial Class frmCustomer
         Me.txtSearchItem = New System.Windows.Forms.TextBox()
         Me.lstRecords = New System.Windows.Forms.ListBox()
         Me.btnExit = New System.Windows.Forms.Button()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.btnBookForCurrentCustomer = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -46,9 +44,6 @@ Partial Class frmCustomer
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.btnReportForm = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.btnWorkshopForm = New System.Windows.Forms.Button()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.btnServiceForm = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -66,7 +61,6 @@ Partial Class frmCustomer
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel10.SuspendLayout()
-        Me.Panel9.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -92,7 +86,7 @@ Partial Class frmCustomer
         Me.lstRecords.Items.AddRange(New Object() {""})
         Me.lstRecords.Location = New System.Drawing.Point(225, 386)
         Me.lstRecords.Name = "lstRecords"
-        Me.lstRecords.Size = New System.Drawing.Size(1228, 441)
+        Me.lstRecords.Size = New System.Drawing.Size(1232, 441)
         Me.lstRecords.TabIndex = 39
         '
         'btnExit
@@ -101,34 +95,11 @@ Partial Class frmCustomer
         Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnExit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
-        Me.btnExit.Location = New System.Drawing.Point(1408, 833)
+        Me.btnExit.Location = New System.Drawing.Point(1412, 833)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(45, 45)
         Me.btnExit.TabIndex = 37
         Me.btnExit.UseVisualStyleBackColor = False
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(614, 192)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(154, 38)
-        Me.Label5.TabIndex = 36
-        Me.Label5.Text = "Create Appointment" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for this Customer"
-        '
-        'btnBookForCurrentCustomer
-        '
-        Me.btnBookForCurrentCustomer.BackColor = System.Drawing.Color.FromArgb(CType(CType(61, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(124, Byte), Integer))
-        Me.btnBookForCurrentCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBookForCurrentCustomer.ForeColor = System.Drawing.Color.FromArgb(CType(CType(61, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(124, Byte), Integer))
-        Me.btnBookForCurrentCustomer.Image = CType(resources.GetObject("btnBookForCurrentCustomer.Image"), System.Drawing.Image)
-        Me.btnBookForCurrentCustomer.Location = New System.Drawing.Point(563, 189)
-        Me.btnBookForCurrentCustomer.Name = "btnBookForCurrentCustomer"
-        Me.btnBookForCurrentCustomer.Size = New System.Drawing.Size(45, 45)
-        Me.btnBookForCurrentCustomer.TabIndex = 35
-        Me.btnBookForCurrentCustomer.UseVisualStyleBackColor = False
         '
         'btnHelp
         '
@@ -163,15 +134,13 @@ Partial Class frmCustomer
         Me.Panel2.Controls.Add(Me.Panel4)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.btnDelete)
-        Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Controls.Add(Me.btnBookForCurrentCustomer)
         Me.Panel2.Controls.Add(Me.btnEdit)
         Me.Panel2.Controls.Add(Me.lblCustomerName)
         Me.Panel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.Panel2.Location = New System.Drawing.Point(225, 12)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1003, 279)
+        Me.Panel2.Size = New System.Drawing.Size(1166, 279)
         Me.Panel2.TabIndex = 31
         '
         'lblTotalRecords
@@ -284,9 +253,9 @@ Partial Class frmCustomer
         Me.lblCustomerName.ForeColor = System.Drawing.Color.White
         Me.lblCustomerName.Location = New System.Drawing.Point(275, 33)
         Me.lblCustomerName.Name = "lblCustomerName"
-        Me.lblCustomerName.Size = New System.Drawing.Size(159, 26)
+        Me.lblCustomerName.Size = New System.Drawing.Size(67, 26)
         Me.lblCustomerName.TabIndex = 1
-        Me.lblCustomerName.Text = "Thomas Carter"
+        Me.lblCustomerName.Text = "name"
         '
         'btnAdd
         '
@@ -304,7 +273,6 @@ Partial Class frmCustomer
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(61, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(124, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Panel10)
-        Me.Panel1.Controls.Add(Me.Panel9)
         Me.Panel1.Controls.Add(Me.Panel6)
         Me.Panel1.Controls.Add(Me.Panel5)
         Me.Panel1.Controls.Add(Me.Panel3)
@@ -346,40 +314,6 @@ Partial Class frmCustomer
         Me.Label13.Size = New System.Drawing.Size(77, 17)
         Me.Label13.TabIndex = 2
         Me.Label13.Text = "REPORTS"
-        '
-        'Panel9
-        '
-        Me.Panel9.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.Panel9.Controls.Add(Me.btnWorkshopForm)
-        Me.Panel9.Controls.Add(Me.Label12)
-        Me.Panel9.Location = New System.Drawing.Point(3, 264)
-        Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(165, 81)
-        Me.Panel9.TabIndex = 23
-        '
-        'btnWorkshopForm
-        '
-        Me.btnWorkshopForm.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.btnWorkshopForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnWorkshopForm.ForeColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.btnWorkshopForm.Image = CType(resources.GetObject("btnWorkshopForm.Image"), System.Drawing.Image)
-        Me.btnWorkshopForm.Location = New System.Drawing.Point(3, 3)
-        Me.btnWorkshopForm.Name = "btnWorkshopForm"
-        Me.btnWorkshopForm.Size = New System.Drawing.Size(45, 45)
-        Me.btnWorkshopForm.TabIndex = 18
-        Me.btnWorkshopForm.UseVisualStyleBackColor = False
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.BackColor = System.Drawing.Color.Transparent
-        Me.Label12.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.ForeColor = System.Drawing.Color.White
-        Me.Label12.Location = New System.Drawing.Point(3, 51)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(105, 17)
-        Me.Label12.TabIndex = 2
-        Me.Label12.Text = "WORKSHOPS"
         '
         'Panel6
         '
@@ -486,6 +420,7 @@ Partial Class frmCustomer
         'cboSearch
         '
         Me.cboSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
+        Me.cboSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboSearch.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!)
         Me.cboSearch.ForeColor = System.Drawing.Color.White
         Me.cboSearch.FormattingEnabled = True
@@ -494,7 +429,6 @@ Partial Class frmCustomer
         Me.cboSearch.Name = "cboSearch"
         Me.cboSearch.Size = New System.Drawing.Size(164, 27)
         Me.cboSearch.TabIndex = 42
-        Me.cboSearch.Text = "Search Name"
         '
         'btnCancelSearch
         '
@@ -515,12 +449,11 @@ Partial Class frmCustomer
         Me.ListBox1.ForeColor = System.Drawing.SystemColors.ScrollBar
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.ItemHeight = 19
-        Me.ListBox1.Items.AddRange(New Object() {" 000    FORENAME             SURNAME              TELEPHONE      ADDRESS1        " &
-                "     ADDRESS2     EMAIL   "})
+        Me.ListBox1.Items.AddRange(New Object() {" 000    FORENAME             SURNAME              TELEPHONE       EMAIL   "})
         Me.ListBox1.Location = New System.Drawing.Point(225, 366)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.SelectionMode = System.Windows.Forms.SelectionMode.None
-        Me.ListBox1.Size = New System.Drawing.Size(1228, 23)
+        Me.ListBox1.Size = New System.Drawing.Size(1232, 23)
         Me.ListBox1.TabIndex = 84
         '
         'frmCustomer
@@ -553,8 +486,6 @@ Partial Class frmCustomer
         Me.Panel1.ResumeLayout(False)
         Me.Panel10.ResumeLayout(False)
         Me.Panel10.PerformLayout()
-        Me.Panel9.ResumeLayout(False)
-        Me.Panel9.PerformLayout()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         Me.Panel5.ResumeLayout(False)
@@ -569,8 +500,6 @@ Partial Class frmCustomer
     Friend WithEvents txtSearchItem As TextBox
     Friend WithEvents lstRecords As ListBox
     Friend WithEvents btnExit As Button
-    Friend WithEvents Label5 As Label
-    Friend WithEvents btnBookForCurrentCustomer As Button
     Friend WithEvents btnHelp As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents Panel2 As Panel
@@ -586,9 +515,6 @@ Partial Class frmCustomer
     Friend WithEvents Panel10 As Panel
     Friend WithEvents btnReportForm As Button
     Friend WithEvents Label13 As Label
-    Friend WithEvents Panel9 As Panel
-    Friend WithEvents btnWorkshopForm As Button
-    Friend WithEvents Label12 As Label
     Friend WithEvents Panel6 As Panel
     Friend WithEvents btnServiceForm As Button
     Friend WithEvents Label9 As Label
