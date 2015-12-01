@@ -24,7 +24,6 @@ Partial Class frmCustomer
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCustomer))
         Me.txtSearchItem = New System.Windows.Forms.TextBox()
-        Me.lstRecords = New System.Windows.Forms.ListBox()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -55,7 +54,14 @@ Partial Class frmCustomer
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cboSearch = New System.Windows.Forms.ComboBox()
         Me.btnCancelSearch = New System.Windows.Forms.Button()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.ltvRecords = New System.Windows.Forms.ListView()
+        Me.colRnum = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colForename = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colSurname = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colTel = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colEmail = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Address1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Address2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,19 +81,6 @@ Partial Class frmCustomer
         Me.txtSearchItem.Name = "txtSearchItem"
         Me.txtSearchItem.Size = New System.Drawing.Size(231, 27)
         Me.txtSearchItem.TabIndex = 41
-        '
-        'lstRecords
-        '
-        Me.lstRecords.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.lstRecords.Font = New System.Drawing.Font("Inconsolata", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstRecords.ForeColor = System.Drawing.Color.White
-        Me.lstRecords.FormattingEnabled = True
-        Me.lstRecords.ItemHeight = 19
-        Me.lstRecords.Items.AddRange(New Object() {""})
-        Me.lstRecords.Location = New System.Drawing.Point(225, 386)
-        Me.lstRecords.Name = "lstRecords"
-        Me.lstRecords.Size = New System.Drawing.Size(1232, 441)
-        Me.lstRecords.TabIndex = 39
         '
         'btnExit
         '
@@ -442,19 +435,57 @@ Partial Class frmCustomer
         Me.btnCancelSearch.TabIndex = 83
         Me.btnCancelSearch.UseVisualStyleBackColor = False
         '
-        'ListBox1
+        'ltvRecords
         '
-        Me.ListBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.ListBox1.Font = New System.Drawing.Font("Inconsolata", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.ListBox1.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 19
-        Me.ListBox1.Items.AddRange(New Object() {" 000    FORENAME             SURNAME              TELEPHONE       EMAIL   "})
-        Me.ListBox1.Location = New System.Drawing.Point(225, 366)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.SelectionMode = System.Windows.Forms.SelectionMode.None
-        Me.ListBox1.Size = New System.Drawing.Size(1232, 23)
-        Me.ListBox1.TabIndex = 84
+        Me.ltvRecords.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
+        Me.ltvRecords.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ltvRecords.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colRnum, Me.colForename, Me.colSurname, Me.colTel, Me.colEmail, Me.Address1, Me.Address2})
+        Me.ltvRecords.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!)
+        Me.ltvRecords.ForeColor = System.Drawing.Color.White
+        Me.ltvRecords.FullRowSelect = True
+        Me.ltvRecords.HideSelection = False
+        Me.ltvRecords.Location = New System.Drawing.Point(221, 361)
+        Me.ltvRecords.MultiSelect = False
+        Me.ltvRecords.Name = "ltvRecords"
+        Me.ltvRecords.Size = New System.Drawing.Size(1232, 466)
+        Me.ltvRecords.TabIndex = 85
+        Me.ltvRecords.UseCompatibleStateImageBehavior = False
+        Me.ltvRecords.View = System.Windows.Forms.View.Details
+        '
+        'colRnum
+        '
+        Me.colRnum.Text = "000"
+        Me.colRnum.Width = 45
+        '
+        'colForename
+        '
+        Me.colForename.Text = "Forename"
+        Me.colForename.Width = 235
+        '
+        'colSurname
+        '
+        Me.colSurname.Text = "Surname"
+        Me.colSurname.Width = 169
+        '
+        'colTel
+        '
+        Me.colTel.Text = "Telephone"
+        Me.colTel.Width = 222
+        '
+        'colEmail
+        '
+        Me.colEmail.Text = "Email"
+        Me.colEmail.Width = 148
+        '
+        'Address1
+        '
+        Me.Address1.Text = "Address 1"
+        Me.Address1.Width = 200
+        '
+        'Address2
+        '
+        Me.Address2.Text = "Address 2"
+        Me.Address2.Width = 200
         '
         'frmCustomer
         '
@@ -462,11 +493,10 @@ Partial Class frmCustomer
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1469, 885)
-        Me.Controls.Add(Me.ListBox1)
+        Me.Controls.Add(Me.ltvRecords)
         Me.Controls.Add(Me.btnCancelSearch)
         Me.Controls.Add(Me.cboSearch)
         Me.Controls.Add(Me.txtSearchItem)
-        Me.Controls.Add(Me.lstRecords)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.Label4)
@@ -498,7 +528,6 @@ Partial Class frmCustomer
     End Sub
 
     Friend WithEvents txtSearchItem As TextBox
-    Friend WithEvents lstRecords As ListBox
     Friend WithEvents btnExit As Button
     Friend WithEvents btnHelp As Button
     Friend WithEvents Label4 As Label
@@ -529,5 +558,12 @@ Partial Class frmCustomer
     Friend WithEvents lblTotalRecords As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents btnCancelSearch As Button
-    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents ltvRecords As ListView
+    Friend WithEvents colRnum As ColumnHeader
+    Friend WithEvents colForename As ColumnHeader
+    Friend WithEvents colSurname As ColumnHeader
+    Friend WithEvents colTel As ColumnHeader
+    Friend WithEvents colEmail As ColumnHeader
+    Friend WithEvents Address1 As ColumnHeader
+    Friend WithEvents Address2 As ColumnHeader
 End Class

@@ -23,11 +23,9 @@ Partial Class frmAppointment
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAppointment))
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.btnCancelSearch = New System.Windows.Forms.Button()
         Me.cboSearch = New System.Windows.Forms.ComboBox()
         Me.txtSearchItem = New System.Windows.Forms.TextBox()
-        Me.lstRecords = New System.Windows.Forms.ListBox()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -57,6 +55,11 @@ Partial Class frmAppointment
         Me.btnCustomerForm = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.lblLen = New System.Windows.Forms.Label()
+        Me.ltvRecords = New System.Windows.Forms.ListView()
+        Me.colRnum = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,20 +69,6 @@ Partial Class frmAppointment
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ListBox1
-        '
-        Me.ListBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.ListBox1.Font = New System.Drawing.Font("Inconsolata", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.ListBox1.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 19
-        Me.ListBox1.Items.AddRange(New Object() {" 000    DATE         TIME     CUSTOMER NAME                         TOTAL PRICE"})
-        Me.ListBox1.Location = New System.Drawing.Point(225, 366)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.SelectionMode = System.Windows.Forms.SelectionMode.None
-        Me.ListBox1.Size = New System.Drawing.Size(1228, 23)
-        Me.ListBox1.TabIndex = 95
         '
         'btnCancelSearch
         '
@@ -115,19 +104,6 @@ Partial Class frmAppointment
         Me.txtSearchItem.Name = "txtSearchItem"
         Me.txtSearchItem.Size = New System.Drawing.Size(231, 27)
         Me.txtSearchItem.TabIndex = 92
-        '
-        'lstRecords
-        '
-        Me.lstRecords.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.lstRecords.Font = New System.Drawing.Font("Inconsolata", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstRecords.ForeColor = System.Drawing.Color.White
-        Me.lstRecords.FormattingEnabled = True
-        Me.lstRecords.ItemHeight = 19
-        Me.lstRecords.Items.AddRange(New Object() {""})
-        Me.lstRecords.Location = New System.Drawing.Point(225, 386)
-        Me.lstRecords.Name = "lstRecords"
-        Me.lstRecords.Size = New System.Drawing.Size(1228, 441)
-        Me.lstRecords.TabIndex = 91
         '
         'btnExit
         '
@@ -468,18 +444,54 @@ Partial Class frmAppointment
         Me.lblLen.TabIndex = 96
         Me.lblLen.Text = "Add New Appointment"
         '
+        'ltvRecords
+        '
+        Me.ltvRecords.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
+        Me.ltvRecords.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ltvRecords.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colRnum, Me.colDate, Me.colTime, Me.colName})
+        Me.ltvRecords.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!)
+        Me.ltvRecords.ForeColor = System.Drawing.Color.White
+        Me.ltvRecords.FullRowSelect = True
+        Me.ltvRecords.HideSelection = False
+        Me.ltvRecords.Location = New System.Drawing.Point(221, 361)
+        Me.ltvRecords.MultiSelect = False
+        Me.ltvRecords.Name = "ltvRecords"
+        Me.ltvRecords.Size = New System.Drawing.Size(1232, 466)
+        Me.ltvRecords.TabIndex = 97
+        Me.ltvRecords.UseCompatibleStateImageBehavior = False
+        Me.ltvRecords.View = System.Windows.Forms.View.Details
+        '
+        'colRnum
+        '
+        Me.colRnum.Text = "000"
+        Me.colRnum.Width = 45
+        '
+        'colDate
+        '
+        Me.colDate.Text = "Date"
+        Me.colDate.Width = 120
+        '
+        'colTime
+        '
+        Me.colTime.Text = "Time"
+        Me.colTime.Width = 80
+        '
+        'colName
+        '
+        Me.colName.Text = "Customer Name"
+        Me.colName.Width = 450
+        '
         'frmAppointment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1469, 885)
+        Me.Controls.Add(Me.ltvRecords)
         Me.Controls.Add(Me.lblLen)
-        Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.btnCancelSearch)
         Me.Controls.Add(Me.cboSearch)
         Me.Controls.Add(Me.txtSearchItem)
-        Me.Controls.Add(Me.lstRecords)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.Label4)
@@ -507,12 +519,9 @@ Partial Class frmAppointment
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ListBox1 As ListBox
     Friend WithEvents btnCancelSearch As Button
     Friend WithEvents cboSearch As ComboBox
     Friend WithEvents txtSearchItem As TextBox
-    Friend WithEvents lstRecords As ListBox
     Friend WithEvents btnExit As Button
     Friend WithEvents btnHelp As Button
     Friend WithEvents Label4 As Label
@@ -542,4 +551,9 @@ Partial Class frmAppointment
     Friend WithEvents btnCustomerForm As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents lblLen As Label
+    Friend WithEvents ltvRecords As ListView
+    Friend WithEvents colRnum As ColumnHeader
+    Friend WithEvents colDate As ColumnHeader
+    Friend WithEvents colTime As ColumnHeader
+    Friend WithEvents colName As ColumnHeader
 End Class

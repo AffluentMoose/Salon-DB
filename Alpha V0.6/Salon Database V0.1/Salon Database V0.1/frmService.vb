@@ -26,53 +26,46 @@ Public Class frmService
 
         End If
 
-        lstRecords.SelectedIndex = 0
-
         cboSearch.SelectedIndex = 0
 
     End Sub
 
     Private Sub DisplayRecords(SearchType As Char, SearchString As String) 'takes in 2 parameters for searching records
 
+        ltvRecords.Items.Clear()
+
         Dim i As Integer
 
-        lstRecords.Items.Clear()
+        For i = 1 To LOF(2) / Len(ServiceRecord)
 
-        If LOF(2) / Len(ServiceRecord) = 0 Then
-            lstRecords.Items.Add("")
-            lstRecords.Items.Add("                                  --- NO RECORDS TO DISPLAY ---")
-            lblCustomerName.Text = ""
-        Else
+            FileGet(2, ServiceRecord, i)
 
-            For i = 1 To LOF(2) / Len(ServiceRecord)
+            Select Case SearchType
+                Case "n"
 
-                FileGet(2, ServiceRecord, i)
+                    Dim NameString As String = ServiceRecord.Name
 
-                Select Case SearchType
-                    Case "n"
-
-                        Dim NameString As String = ServiceRecord.Name
-
-                        If NameString.ToLower.Contains(SearchString.ToLower) Then
-                            DisplayCurrentRecord(i)
-                        End If
-
-                    Case Else
+                    If NameString.ToLower.Contains(SearchString.ToLower) Then
                         DisplayCurrentRecord(i)
+                    End If
 
-                End Select
+                Case Else
+                    DisplayCurrentRecord(i)
 
+            End Select
 
-            Next i
-
-        End If
-
-        If lstRecords.Items.Count > 0 Then lstRecords.SelectedIndex = CurrentSerRNum - 1
+        Next i
 
     End Sub
 
     Private Sub DisplayCurrentRecord(ByVal i As Integer)
-        lstRecords.Items.Add(" " & i.ToString("D3") & Space(4) & ServiceRecord.Price.ToString("00.00") & Space(5) & ServiceRecord.Name & Space(5) & ServiceRecord.Description)
+        With ServiceRecord
+            Dim Item As New ListViewItem(i.ToString("D3"), 0)
+            Item.SubItems.Add(Trim(.Price.ToString("00.00")))
+            Item.SubItems.Add(Trim(.Name))
+            Item.SubItems.Add(Trim(.Description))
+            ltvRecords.Items.Add(Item)
+        End With
     End Sub
 
     Private Sub ReadRecord()
@@ -166,15 +159,6 @@ Public Class frmService
 
     End Sub
 
-    Private Sub lstRecords_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRecords.SelectedIndexChanged
-
-        If IsNumeric(Mid(lstRecords.Text, 3, 3)) Then
-            lblCurrentRecord.Text = Val(Mid(lstRecords.Text, 3, 3))
-            ReadRecord()
-        End If
-
-    End Sub
-
     Private Sub frmCustomer_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged
 
         If ReturnAction <> "delete" Then
@@ -243,7 +227,7 @@ Public Class frmService
     End Sub
 
 
-    Private Sub lstRecords_KeyUp(sender As Object, e As KeyEventArgs) Handles lstRecords.KeyUp
+    Private Sub lstRecords_KeyUp(sender As Object, e As KeyEventArgs)
 
         Select Case e.KeyCode
 
@@ -282,6 +266,13 @@ Public Class frmService
     Private Sub cboSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearch.SelectedIndexChanged
         txtSearchItem.Text = ""
         txtSearchItem.Focus()
+    End Sub
+
+    Private Sub ltvRecords_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles ltvRecords.ItemSelectionChanged
+        If e.IsSelected = True Then
+            lblCurrentRecord.Text = Val(ltvRecords.FocusedItem.Text)
+            ReadRecord()
+        End If
     End Sub
 
 End Class

@@ -26,8 +26,6 @@ Public Class frmCustomer
 
         End If
 
-        lstRecords.SelectedIndex = 0
-
         cboSearch.SelectedIndex = 0
 
     End Sub
@@ -35,59 +33,57 @@ Public Class frmCustomer
     Private Sub DisplayRecords(SearchType As Char, SearchString As String) 'takes in 2 parameters for searching records
 
         Dim i As Integer
+        ltvRecords.Items.Clear()
 
-        lstRecords.Items.Clear()
+        For i = 1 To LOF(1) / Len(CustomerRecord)
 
-        If LOF(1) / Len(CustomerRecord) = 0 Then
-            lstRecords.Items.Add("")
-            lstRecords.Items.Add("                                  --- NO RECORDS TO DISPLAY ---")
-            lblCustomerName.Text = ""
-        Else
+            FileGet(1, CustomerRecord, i)
 
-            For i = 1 To LOF(1) / Len(CustomerRecord)
+            Select Case SearchType
+                Case "n"
 
-                FileGet(1, CustomerRecord, i)
+                    Dim SearchedString As String = CustomerRecord.Forename & CustomerRecord.Surname
 
-                Select Case SearchType
-                    Case "n"
-
-                        Dim SearchedString As String = CustomerRecord.Forename & CustomerRecord.Surname
-
-                        If SearchedString.ToLower.Contains(SearchString.ToLower) Then
-                            DisplayCurrentRecord(i)
-                        End If
-
-                    Case "t"
-
-                        Dim SearchedString As String = CustomerRecord.Telephone
-
-                        If SearchedString.ToLower.Contains(SearchString.ToLower) Then
-                            DisplayCurrentRecord(i)
-                        End If
-
-                    Case "e"
-
-                        Dim SearchedString As String = CustomerRecord.Email
-
-                        If SearchedString.ToLower.Contains(SearchString.ToLower) Then
-                            DisplayCurrentRecord(i)
-                        End If
-
-                    Case Else
+                    If SearchedString.ToLower.Contains(SearchString.ToLower) Then
                         DisplayCurrentRecord(i)
+                    End If
 
-                End Select
+                Case "t"
 
-            Next i
+                    Dim SearchedString As String = CustomerRecord.Telephone
 
-        End If
+                    If SearchedString.ToLower.Contains(SearchString.ToLower) Then
+                        DisplayCurrentRecord(i)
+                    End If
 
-        If lstRecords.Items.Count > 0 Then lstRecords.SelectedIndex = CurrentCustRNum - 1
+                Case "e"
+
+                    Dim SearchedString As String = CustomerRecord.Email
+
+                    If SearchedString.ToLower.Contains(SearchString.ToLower) Then
+                        DisplayCurrentRecord(i)
+                    End If
+
+                Case Else
+                    DisplayCurrentRecord(i)
+
+            End Select
+
+        Next i
 
     End Sub
 
     Private Sub DisplayCurrentRecord(ByVal i As Integer)
-        lstRecords.Items.Add(" " & i.ToString("D3") & Space(4) & CustomerRecord.Forename & " " & CustomerRecord.Surname & " " & CustomerRecord.Telephone & "  " & CustomerRecord.Email)
+        With CustomerRecord
+            Dim Item As New ListViewItem(i.ToString("D3"), 0)
+            Item.SubItems.Add(Trim(.Forename))
+            Item.SubItems.Add(Trim(.Surname))
+            Item.SubItems.Add(Trim(.Telephone))
+            Item.SubItems.Add(Trim(.Email))
+            Item.SubItems.Add(Trim(.Address1))
+            Item.SubItems.Add(Trim(.Address2))
+            ltvRecords.Items.Add(Item)
+        End With
     End Sub
 
     Private Sub ReadRecord()
@@ -188,15 +184,6 @@ Public Class frmCustomer
 
     End Sub
 
-    Private Sub lstRecords_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRecords.SelectedIndexChanged
-
-        If IsNumeric(Mid(lstRecords.Text, 3, 3)) Then
-            lblCurrentRecord.Text = Val(Mid(lstRecords.Text, 3, 3))
-            ReadRecord()
-        End If
-
-    End Sub
-
     Private Sub frmCustomer_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged
 
         If ReturnAction <> "delete" Then
@@ -253,6 +240,7 @@ Public Class frmCustomer
                 Case "Search Name"
                     DisplayRecords("n", SearchString)
                 Case "Search Telephone"
+
                     DisplayRecords("t", SearchString)
                 Case "Search Email"
                     DisplayRecords("e", SearchString)
@@ -270,7 +258,7 @@ Public Class frmCustomer
     End Sub
 
 
-    Private Sub lstRecords_KeyUp(sender As Object, e As KeyEventArgs) Handles lstRecords.KeyUp
+    Private Sub lstRecords_KeyUp(sender As Object, e As KeyEventArgs)
 
         Select Case e.KeyCode
 
@@ -309,6 +297,19 @@ Public Class frmCustomer
     Private Sub cboSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearch.SelectedIndexChanged
         txtSearchItem.Text = ""
         txtSearchItem.Focus()
+    End Sub
+
+    Private Sub btnReportForm_Click(sender As Object, e As EventArgs) Handles btnReportForm.Click
+        FileClose(1)
+        frmReports.Show()
+        Me.Close()
+    End Sub
+
+    Private Sub ltvRecords_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles ltvRecords.ItemSelectionChanged
+        If e.IsSelected = True Then
+            lblCurrentRecord.Text = Val(ltvRecords.FocusedItem.Text)
+            ReadRecord()
+        End If
     End Sub
 
 End Class

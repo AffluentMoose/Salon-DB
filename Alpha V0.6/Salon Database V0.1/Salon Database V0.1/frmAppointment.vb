@@ -26,8 +26,6 @@ Public Class frmAppointment
 
         End If
 
-        lstRecords.SelectedIndex = 0
-
         cboSearch.SelectedIndex = 0
 
     End Sub
@@ -36,51 +34,46 @@ Public Class frmAppointment
 
         Dim i As Integer
 
-        lstRecords.Items.Clear()
+        ltvRecords.Items.Clear()
 
-        If LOF(3) / Len(AppointmentRecord) = 0 Then
-            lstRecords.Items.Add("")
-            lstRecords.Items.Add("                                  --- NO RECORDS TO DISPLAY ---")
-            lblCustomerName.Text = ""
-        Else
+        For i = 1 To LOF(3) / Len(AppointmentRecord)
 
-            For i = 1 To LOF(3) / Len(AppointmentRecord)
+            FileGet(3, AppointmentRecord, i)
 
-                FileGet(3, AppointmentRecord, i)
+            Select Case SearchType
+                Case "n"
 
-                Select Case SearchType
-                    Case "n"
+                    Dim SearchedString As String = AppointmentRecord.CustomerName
 
-                        Dim SearchedString As String = AppointmentRecord.CustomerName
-
-                        If SearchedString.ToLower.Contains(SearchString.ToLower) Then
-                            DisplayCurrentRecord(i)
-                        End If
-
-                    Case "d"
-
-                        Dim SearchedString As String = AppointmentRecord.AppDate
-
-                        If SearchedString.ToLower.Contains(SearchString.ToLower) Then
-                            DisplayCurrentRecord(i)
-                        End If
-
-                    Case Else
+                    If SearchedString.ToLower.Contains(SearchString.ToLower) Then
                         DisplayCurrentRecord(i)
+                    End If
 
-                End Select
+                Case "d"
 
+                    Dim SearchedString As String = AppointmentRecord.AppDate
 
-            Next i
+                    If SearchedString.ToLower.Contains(SearchString.ToLower) Then
+                        DisplayCurrentRecord(i)
+                    End If
 
-        End If
+                Case Else
+                    DisplayCurrentRecord(i)
 
-        If lstRecords.Items.Count > 0 Then lstRecords.SelectedIndex = CurrentAppRNum - 1
+            End Select
+
+        Next i
 
     End Sub
 
     Private Sub DisplayCurrentRecord(ByVal i As Integer)
-        lstRecords.Items.Add(" " & i.ToString("D3") & Space(4) & AppointmentRecord.AppDate & Space(3) & AppointmentRecord.AppTime.ToString("H:mm") & Space(4) & AppointmentRecord.CustomerName)
+        With AppointmentRecord
+            Dim Item As New ListViewItem(i.ToString("D3"), 0)
+            Item.SubItems.Add(Trim(.AppDate))
+            Item.SubItems.Add(Trim(.AppTime.ToString("hh:mm")))
+            Item.SubItems.Add(Trim(.CustomerName))
+            ltvRecords.Items.Add(Item)
+        End With
     End Sub
 
     Private Sub ReadRecord()
@@ -174,15 +167,6 @@ Public Class frmAppointment
 
     End Sub
 
-    Private Sub lstRecords_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRecords.SelectedIndexChanged
-
-        If IsNumeric(Mid(lstRecords.Text, 3, 3)) Then
-            lblCurrentRecord.Text = Val(Mid(lstRecords.Text, 3, 3))
-            ReadRecord()
-        End If
-
-    End Sub
-
     Private Sub frmAppointment_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged
 
         If ReturnAction <> "delete" Then
@@ -253,7 +237,7 @@ Public Class frmAppointment
     End Sub
 
 
-    Private Sub lstRecords_KeyUp(sender As Object, e As KeyEventArgs) Handles lstRecords.KeyUp
+    Private Sub lstRecords_KeyUp(sender As Object, e As KeyEventArgs)
 
         Select Case e.KeyCode
 
@@ -290,6 +274,13 @@ Public Class frmAppointment
     Private Sub cboSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearch.SelectedIndexChanged
         txtSearchItem.Text = ""
         txtSearchItem.Focus()
+    End Sub
+
+    Private Sub ltvRecords_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles ltvRecords.ItemSelectionChanged
+        If e.IsSelected = True Then
+            lblCurrentRecord.Text = Val(ltvRecords.FocusedItem.Text)
+            ReadRecord()
+        End If
     End Sub
 
 End Class

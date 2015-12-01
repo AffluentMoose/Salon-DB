@@ -23,11 +23,9 @@ Partial Class frmService
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmService))
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.btnCancelSearch = New System.Windows.Forms.Button()
         Me.cboSearch = New System.Windows.Forms.ComboBox()
         Me.txtSearchItem = New System.Windows.Forms.TextBox()
-        Me.lstRecords = New System.Windows.Forms.ListBox()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -56,6 +54,11 @@ Partial Class frmService
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.btnCustomerForm = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.ltvRecords = New System.Windows.Forms.ListView()
+        Me.colRnum = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colPrice = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,20 +68,6 @@ Partial Class frmService
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ListBox1
-        '
-        Me.ListBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.ListBox1.Font = New System.Drawing.Font("Inconsolata", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.ListBox1.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 19
-        Me.ListBox1.Items.AddRange(New Object() {" 000    PRICE     NAME                     DESCRIPTION"})
-        Me.ListBox1.Location = New System.Drawing.Point(225, 366)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.SelectionMode = System.Windows.Forms.SelectionMode.None
-        Me.ListBox1.Size = New System.Drawing.Size(1228, 23)
-        Me.ListBox1.TabIndex = 95
         '
         'btnCancelSearch
         '
@@ -114,19 +103,6 @@ Partial Class frmService
         Me.txtSearchItem.Name = "txtSearchItem"
         Me.txtSearchItem.Size = New System.Drawing.Size(231, 27)
         Me.txtSearchItem.TabIndex = 92
-        '
-        'lstRecords
-        '
-        Me.lstRecords.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.lstRecords.Font = New System.Drawing.Font("Inconsolata", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstRecords.ForeColor = System.Drawing.Color.White
-        Me.lstRecords.FormattingEnabled = True
-        Me.lstRecords.ItemHeight = 19
-        Me.lstRecords.Items.AddRange(New Object() {""})
-        Me.lstRecords.Location = New System.Drawing.Point(225, 386)
-        Me.lstRecords.Name = "lstRecords"
-        Me.lstRecords.Size = New System.Drawing.Size(1228, 441)
-        Me.lstRecords.TabIndex = 91
         '
         'btnExit
         '
@@ -456,17 +432,53 @@ Partial Class frmService
         Me.Label7.TabIndex = 2
         Me.Label7.Text = "CUSTOMERS"
         '
+        'ltvRecords
+        '
+        Me.ltvRecords.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
+        Me.ltvRecords.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ltvRecords.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colRnum, Me.colPrice, Me.colName, Me.colDescription})
+        Me.ltvRecords.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!)
+        Me.ltvRecords.ForeColor = System.Drawing.Color.White
+        Me.ltvRecords.FullRowSelect = True
+        Me.ltvRecords.HideSelection = False
+        Me.ltvRecords.Location = New System.Drawing.Point(221, 361)
+        Me.ltvRecords.MultiSelect = False
+        Me.ltvRecords.Name = "ltvRecords"
+        Me.ltvRecords.Size = New System.Drawing.Size(1232, 466)
+        Me.ltvRecords.TabIndex = 96
+        Me.ltvRecords.UseCompatibleStateImageBehavior = False
+        Me.ltvRecords.View = System.Windows.Forms.View.Details
+        '
+        'colRnum
+        '
+        Me.colRnum.Text = "000"
+        Me.colRnum.Width = 45
+        '
+        'colPrice
+        '
+        Me.colPrice.Text = "Price"
+        Me.colPrice.Width = 100
+        '
+        'colName
+        '
+        Me.colName.Text = "Name"
+        Me.colName.Width = 250
+        '
+        'colDescription
+        '
+        Me.colDescription.Text = "Description"
+        Me.colDescription.Width = 222
+        '
         'frmService
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1469, 885)
-        Me.Controls.Add(Me.ListBox1)
+        Me.Controls.Add(Me.ltvRecords)
         Me.Controls.Add(Me.btnCancelSearch)
         Me.Controls.Add(Me.cboSearch)
         Me.Controls.Add(Me.txtSearchItem)
-        Me.Controls.Add(Me.lstRecords)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.Label4)
@@ -493,12 +505,9 @@ Partial Class frmService
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ListBox1 As ListBox
     Friend WithEvents btnCancelSearch As Button
     Friend WithEvents cboSearch As ComboBox
     Friend WithEvents txtSearchItem As TextBox
-    Friend WithEvents lstRecords As ListBox
     Friend WithEvents btnExit As Button
     Friend WithEvents btnHelp As Button
     Friend WithEvents Label4 As Label
@@ -527,4 +536,9 @@ Partial Class frmService
     Friend WithEvents Panel3 As Panel
     Friend WithEvents btnCustomerForm As Button
     Friend WithEvents Label7 As Label
+    Friend WithEvents ltvRecords As ListView
+    Friend WithEvents colRnum As ColumnHeader
+    Friend WithEvents colPrice As ColumnHeader
+    Friend WithEvents colName As ColumnHeader
+    Friend WithEvents colDescription As ColumnHeader
 End Class
