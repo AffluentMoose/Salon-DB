@@ -275,4 +275,10 @@ Public Class frmService
         End If
     End Sub
 
+    Private Sub btnReportForm_Click(sender As Object, e As EventArgs) Handles btnReportForm.Click
+        FileClose(2)
+        frmReports.Show()
+        Me.Close()
+    End Sub
+
 End Class

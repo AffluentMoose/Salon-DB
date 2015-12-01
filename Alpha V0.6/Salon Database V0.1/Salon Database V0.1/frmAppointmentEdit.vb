@@ -13,10 +13,15 @@ Public Class frmAppointmentEdit
             MaxAppServiceRecordNumber = LOF(4) / Len(AppSerRecord) + 1
         End If
 
+        cboCustomer.DisplayMember = "Name"
+        cboCustomer.ValueMember = "Id"
+
         FileOpen(1, CustomerFilePath, OpenMode.Random, , , Len(CustomerRecord))
+        Dim AddString As String
         For i = 1 To LOF(1) / Len(CustomerRecord)
             FileGet(1, CustomerRecord, i)
-            cboCustomer.Items.Add(Trim(CustomerRecord.Forename) & " " & Trim(CustomerRecord.Surname))
+            AddString = Trim(CustomerRecord.Forename) & " " & Trim(CustomerRecord.Surname)
+            cboCustomer.Items.Add(New With {.Name = AddString, .Id = CustomerRecord.ID})
         Next
 
         FileOpen(2, ServiceFilePath, OpenMode.Random, , , Len(ServiceRecord))
@@ -117,6 +122,7 @@ Public Class frmAppointmentEdit
         Dim CurrentRNum As Integer = 0
 
         If ServiceName = "" Then
+            ServiceName = "x"
             DeleteService = True
         End If
 
@@ -150,7 +156,7 @@ Public Class frmAppointmentEdit
                         Else
                             '      DELETE THE FOUND RECORD
                             '------------------------------------
-                            AppSerRecord.ServiceName = "DELETED"
+                            AppSerRecord.ServiceName = "x"
                             FilePut(4, AppSerRecord, CurrentRNum)
                             '------------------------------------
                             RecordSaved = True
@@ -202,6 +208,7 @@ Public Class frmAppointmentEdit
         SaveService(Trim(cboService4.Text), 4, CInt(lblRecordID.Text))
 
         With AppointmentRecord 'write into record
+            .CustomerID = cboCustomer.SelectedItem.Id
             .ID = lblRecordID.Text
             .AppDate = dtpDate.Text
             .AppTime = dtpTime.Text

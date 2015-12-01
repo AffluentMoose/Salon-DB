@@ -34,23 +34,28 @@ Partial Class frmReports
         Me.btnCustomerForm = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lbl1 = New System.Windows.Forms.Label()
         Me.btnDisplayReport = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpCustServHistory = New System.Windows.Forms.GroupBox()
         Me.ltvCustName = New System.Windows.Forms.ListView()
+        Me.colName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboCustomerName = New System.Windows.Forms.ComboBox()
         Me.cboReportType = New System.Windows.Forms.ComboBox()
         Me.dtpAppDate = New System.Windows.Forms.DateTimePicker()
-        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.ltvReport = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.grpAppForDate = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.calDatePicker = New System.Windows.Forms.MonthCalendar()
+        Me.lblDatePicked = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.grpCustServHistory.SuspendLayout()
+        Me.grpAppForDate.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -170,9 +175,10 @@ Partial Class frmReports
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(61, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(124, Byte), Integer))
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Controls.Add(Me.grpAppForDate)
+        Me.Panel2.Controls.Add(Me.lbl1)
         Me.Panel2.Controls.Add(Me.btnDisplayReport)
-        Me.Panel2.Controls.Add(Me.GroupBox1)
+        Me.Panel2.Controls.Add(Me.grpCustServHistory)
         Me.Panel2.Controls.Add(Me.cboReportType)
         Me.Panel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.Panel2.Location = New System.Drawing.Point(190, 12)
@@ -180,16 +186,16 @@ Partial Class frmReports
         Me.Panel2.Size = New System.Drawing.Size(492, 916)
         Me.Panel2.TabIndex = 32
         '
-        'Label2
+        'lbl1
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(54, 68)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(149, 24)
-        Me.Label2.TabIndex = 46
-        Me.Label2.Text = "Display Report"
+        Me.lbl1.AutoSize = True
+        Me.lbl1.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl1.ForeColor = System.Drawing.Color.White
+        Me.lbl1.Location = New System.Drawing.Point(54, 68)
+        Me.lbl1.Name = "lbl1"
+        Me.lbl1.Size = New System.Drawing.Size(149, 24)
+        Me.lbl1.TabIndex = 46
+        Me.lbl1.Text = "Display Report"
         '
         'btnDisplayReport
         '
@@ -203,18 +209,18 @@ Partial Class frmReports
         Me.btnDisplayReport.TabIndex = 45
         Me.btnDisplayReport.UseVisualStyleBackColor = False
         '
-        'GroupBox1
+        'grpCustServHistory
         '
-        Me.GroupBox1.Controls.Add(Me.ltvCustName)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.cboCustomerName)
-        Me.GroupBox1.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 104)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(484, 807)
-        Me.GroupBox1.TabIndex = 44
-        Me.GroupBox1.TabStop = False
+        Me.grpCustServHistory.Controls.Add(Me.ltvCustName)
+        Me.grpCustServHistory.Controls.Add(Me.Label1)
+        Me.grpCustServHistory.Controls.Add(Me.cboCustomerName)
+        Me.grpCustServHistory.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpCustServHistory.ForeColor = System.Drawing.Color.White
+        Me.grpCustServHistory.Location = New System.Drawing.Point(3, 104)
+        Me.grpCustServHistory.Name = "grpCustServHistory"
+        Me.grpCustServHistory.Size = New System.Drawing.Size(484, 807)
+        Me.grpCustServHistory.TabIndex = 44
+        Me.grpCustServHistory.TabStop = False
         '
         'ltvCustName
         '
@@ -232,6 +238,11 @@ Partial Class frmReports
         Me.ltvCustName.TabIndex = 97
         Me.ltvCustName.UseCompatibleStateImageBehavior = False
         Me.ltvCustName.View = System.Windows.Forms.View.Details
+        '
+        'colName
+        '
+        Me.colName.Text = "Customer Name"
+        Me.colName.Width = 470
         '
         'Label1
         '
@@ -276,32 +287,73 @@ Partial Class frmReports
         Me.dtpAppDate.TabIndex = 0
         Me.dtpAppDate.Visible = False
         '
-        'ListView1
+        'ltvReport
         '
-        Me.ListView1.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.ListView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
-        Me.ListView1.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!)
-        Me.ListView1.ForeColor = System.Drawing.Color.White
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.HideSelection = False
-        Me.ListView1.Location = New System.Drawing.Point(688, 12)
-        Me.ListView1.MultiSelect = False
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(842, 916)
-        Me.ListView1.TabIndex = 98
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.ltvReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
+        Me.ltvReport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ltvReport.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
+        Me.ltvReport.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ltvReport.ForeColor = System.Drawing.Color.White
+        Me.ltvReport.FullRowSelect = True
+        Me.ltvReport.HideSelection = False
+        Me.ltvReport.Location = New System.Drawing.Point(688, 12)
+        Me.ltvReport.MultiSelect = False
+        Me.ltvReport.Name = "ltvReport"
+        Me.ltvReport.Size = New System.Drawing.Size(842, 916)
+        Me.ltvReport.TabIndex = 98
+        Me.ltvReport.UseCompatibleStateImageBehavior = False
+        Me.ltvReport.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "Customer Name"
-        Me.ColumnHeader1.Width = 470
+        Me.ColumnHeader1.Text = ""
+        Me.ColumnHeader1.Width = 400
         '
-        'colName
+        'grpAppForDate
         '
-        Me.colName.Text = "Customer Name"
-        Me.colName.Width = 470
+        Me.grpAppForDate.Controls.Add(Me.lblDatePicked)
+        Me.grpAppForDate.Controls.Add(Me.calDatePicker)
+        Me.grpAppForDate.Controls.Add(Me.Label3)
+        Me.grpAppForDate.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpAppForDate.ForeColor = System.Drawing.Color.White
+        Me.grpAppForDate.Location = New System.Drawing.Point(3, 104)
+        Me.grpAppForDate.Name = "grpAppForDate"
+        Me.grpAppForDate.Size = New System.Drawing.Size(484, 807)
+        Me.grpAppForDate.TabIndex = 98
+        Me.grpAppForDate.TabStop = False
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.White
+        Me.Label3.Location = New System.Drawing.Point(6, 26)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(118, 24)
+        Me.Label3.TabIndex = 47
+        Me.Label3.Text = "Pick a Date"
+        '
+        'calDatePicker
+        '
+        Me.calDatePicker.BackColor = System.Drawing.SystemColors.Window
+        Me.calDatePicker.CalendarDimensions = New System.Drawing.Size(2, 5)
+        Me.calDatePicker.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!)
+        Me.calDatePicker.Location = New System.Drawing.Point(10, 59)
+        Me.calDatePicker.MaxSelectionCount = 1
+        Me.calDatePicker.MinDate = New Date(1999, 1, 1, 0, 0, 0, 0)
+        Me.calDatePicker.Name = "calDatePicker"
+        Me.calDatePicker.TabIndex = 88
+        '
+        'lblDatePicked
+        '
+        Me.lblDatePicked.AutoSize = True
+        Me.lblDatePicked.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDatePicked.ForeColor = System.Drawing.Color.White
+        Me.lblDatePicked.Location = New System.Drawing.Point(348, 26)
+        Me.lblDatePicked.Name = "lblDatePicked"
+        Me.lblDatePicked.Size = New System.Drawing.Size(120, 24)
+        Me.lblDatePicked.TabIndex = 89
+        Me.lblDatePicked.Text = "11/11/2015"
         '
         'frmReports
         '
@@ -309,7 +361,7 @@ Partial Class frmReports
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1542, 941)
-        Me.Controls.Add(Me.ListView1)
+        Me.Controls.Add(Me.ltvReport)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.dtpAppDate)
@@ -326,8 +378,10 @@ Partial Class frmReports
         Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.grpCustServHistory.ResumeLayout(False)
+        Me.grpCustServHistory.PerformLayout()
+        Me.grpAppForDate.ResumeLayout(False)
+        Me.grpAppForDate.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -343,15 +397,19 @@ Partial Class frmReports
     Friend WithEvents btnCustomerForm As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents grpCustServHistory As GroupBox
     Friend WithEvents cboReportType As ComboBox
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lbl1 As Label
     Friend WithEvents btnDisplayReport As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents cboCustomerName As ComboBox
     Friend WithEvents ltvCustName As ListView
     Friend WithEvents dtpAppDate As DateTimePicker
-    Friend WithEvents ListView1 As ListView
+    Friend WithEvents ltvReport As ListView
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents colName As ColumnHeader
+    Friend WithEvents grpAppForDate As GroupBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents calDatePicker As MonthCalendar
+    Friend WithEvents lblDatePicked As Label
 End Class
