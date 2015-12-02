@@ -34,6 +34,10 @@ Partial Class frmReports
         Me.btnCustomerForm = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.grpAppForDate = New System.Windows.Forms.GroupBox()
+        Me.lblDatePicked = New System.Windows.Forms.Label()
+        Me.calDatePicker = New System.Windows.Forms.MonthCalendar()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.lbl1 = New System.Windows.Forms.Label()
         Me.btnDisplayReport = New System.Windows.Forms.Button()
         Me.grpCustServHistory = New System.Windows.Forms.GroupBox()
@@ -44,18 +48,15 @@ Partial Class frmReports
         Me.cboReportType = New System.Windows.Forms.ComboBox()
         Me.dtpAppDate = New System.Windows.Forms.DateTimePicker()
         Me.ltvReport = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.grpAppForDate = New System.Windows.Forms.GroupBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.calDatePicker = New System.Windows.Forms.MonthCalendar()
-        Me.lblDatePicked = New System.Windows.Forms.Label()
+        Me.col1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.chkGrid = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.grpCustServHistory.SuspendLayout()
         Me.grpAppForDate.SuspendLayout()
+        Me.grpCustServHistory.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -175,6 +176,7 @@ Partial Class frmReports
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(61, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(124, Byte), Integer))
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.chkGrid)
         Me.Panel2.Controls.Add(Me.grpAppForDate)
         Me.Panel2.Controls.Add(Me.lbl1)
         Me.Panel2.Controls.Add(Me.btnDisplayReport)
@@ -185,6 +187,52 @@ Partial Class frmReports
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(492, 916)
         Me.Panel2.TabIndex = 32
+        '
+        'grpAppForDate
+        '
+        Me.grpAppForDate.Controls.Add(Me.lblDatePicked)
+        Me.grpAppForDate.Controls.Add(Me.calDatePicker)
+        Me.grpAppForDate.Controls.Add(Me.Label3)
+        Me.grpAppForDate.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpAppForDate.ForeColor = System.Drawing.Color.White
+        Me.grpAppForDate.Location = New System.Drawing.Point(3, 104)
+        Me.grpAppForDate.Name = "grpAppForDate"
+        Me.grpAppForDate.Size = New System.Drawing.Size(484, 807)
+        Me.grpAppForDate.TabIndex = 98
+        Me.grpAppForDate.TabStop = False
+        '
+        'lblDatePicked
+        '
+        Me.lblDatePicked.AutoSize = True
+        Me.lblDatePicked.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDatePicked.ForeColor = System.Drawing.Color.White
+        Me.lblDatePicked.Location = New System.Drawing.Point(348, 26)
+        Me.lblDatePicked.Name = "lblDatePicked"
+        Me.lblDatePicked.Size = New System.Drawing.Size(120, 24)
+        Me.lblDatePicked.TabIndex = 89
+        Me.lblDatePicked.Text = "11/11/2015"
+        '
+        'calDatePicker
+        '
+        Me.calDatePicker.BackColor = System.Drawing.SystemColors.Window
+        Me.calDatePicker.CalendarDimensions = New System.Drawing.Size(2, 5)
+        Me.calDatePicker.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!)
+        Me.calDatePicker.Location = New System.Drawing.Point(10, 59)
+        Me.calDatePicker.MaxSelectionCount = 1
+        Me.calDatePicker.MinDate = New Date(1999, 1, 1, 0, 0, 0, 0)
+        Me.calDatePicker.Name = "calDatePicker"
+        Me.calDatePicker.TabIndex = 88
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.White
+        Me.Label3.Location = New System.Drawing.Point(6, 26)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(118, 24)
+        Me.Label3.TabIndex = 47
+        Me.Label3.Text = "Pick a Date"
         '
         'lbl1
         '
@@ -291,7 +339,7 @@ Partial Class frmReports
         '
         Me.ltvReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
         Me.ltvReport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ltvReport.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
+        Me.ltvReport.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.col1})
         Me.ltvReport.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ltvReport.ForeColor = System.Drawing.Color.White
         Me.ltvReport.FullRowSelect = True
@@ -304,56 +352,22 @@ Partial Class frmReports
         Me.ltvReport.UseCompatibleStateImageBehavior = False
         Me.ltvReport.View = System.Windows.Forms.View.Details
         '
-        'ColumnHeader1
+        'col1
         '
-        Me.ColumnHeader1.Text = ""
-        Me.ColumnHeader1.Width = 400
+        Me.col1.Text = ""
+        Me.col1.Width = 400
         '
-        'grpAppForDate
+        'chkGrid
         '
-        Me.grpAppForDate.Controls.Add(Me.lblDatePicked)
-        Me.grpAppForDate.Controls.Add(Me.calDatePicker)
-        Me.grpAppForDate.Controls.Add(Me.Label3)
-        Me.grpAppForDate.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpAppForDate.ForeColor = System.Drawing.Color.White
-        Me.grpAppForDate.Location = New System.Drawing.Point(3, 104)
-        Me.grpAppForDate.Name = "grpAppForDate"
-        Me.grpAppForDate.Size = New System.Drawing.Size(484, 807)
-        Me.grpAppForDate.TabIndex = 98
-        Me.grpAppForDate.TabStop = False
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(6, 26)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(118, 24)
-        Me.Label3.TabIndex = 47
-        Me.Label3.Text = "Pick a Date"
-        '
-        'calDatePicker
-        '
-        Me.calDatePicker.BackColor = System.Drawing.SystemColors.Window
-        Me.calDatePicker.CalendarDimensions = New System.Drawing.Size(2, 5)
-        Me.calDatePicker.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!)
-        Me.calDatePicker.Location = New System.Drawing.Point(10, 59)
-        Me.calDatePicker.MaxSelectionCount = 1
-        Me.calDatePicker.MinDate = New Date(1999, 1, 1, 0, 0, 0, 0)
-        Me.calDatePicker.Name = "calDatePicker"
-        Me.calDatePicker.TabIndex = 88
-        '
-        'lblDatePicked
-        '
-        Me.lblDatePicked.AutoSize = True
-        Me.lblDatePicked.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDatePicked.ForeColor = System.Drawing.Color.White
-        Me.lblDatePicked.Location = New System.Drawing.Point(348, 26)
-        Me.lblDatePicked.Name = "lblDatePicked"
-        Me.lblDatePicked.Size = New System.Drawing.Size(120, 24)
-        Me.lblDatePicked.TabIndex = 89
-        Me.lblDatePicked.Text = "11/11/2015"
+        Me.chkGrid.AutoSize = True
+        Me.chkGrid.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 15.75!)
+        Me.chkGrid.ForeColor = System.Drawing.Color.White
+        Me.chkGrid.Location = New System.Drawing.Point(356, 67)
+        Me.chkGrid.Name = "chkGrid"
+        Me.chkGrid.Size = New System.Drawing.Size(135, 28)
+        Me.chkGrid.TabIndex = 99
+        Me.chkGrid.Text = "Show Grid "
+        Me.chkGrid.UseVisualStyleBackColor = True
         '
         'frmReports
         '
@@ -378,10 +392,10 @@ Partial Class frmReports
         Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        Me.grpCustServHistory.ResumeLayout(False)
-        Me.grpCustServHistory.PerformLayout()
         Me.grpAppForDate.ResumeLayout(False)
         Me.grpAppForDate.PerformLayout()
+        Me.grpCustServHistory.ResumeLayout(False)
+        Me.grpCustServHistory.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -406,10 +420,11 @@ Partial Class frmReports
     Friend WithEvents ltvCustName As ListView
     Friend WithEvents dtpAppDate As DateTimePicker
     Friend WithEvents ltvReport As ListView
-    Friend WithEvents ColumnHeader1 As ColumnHeader
+    Friend WithEvents col1 As ColumnHeader
     Friend WithEvents colName As ColumnHeader
     Friend WithEvents grpAppForDate As GroupBox
     Friend WithEvents Label3 As Label
     Friend WithEvents calDatePicker As MonthCalendar
     Friend WithEvents lblDatePicked As Label
+    Friend WithEvents chkGrid As CheckBox
 End Class
