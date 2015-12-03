@@ -46,10 +46,6 @@
         AppSerRecordsCount = AppServices.Count - 1
         '------------------------------------------------------------------------------
 
-        '--------- APPOINTMENT FOR DATE -----------------------------------------------
-        dtpAppDate.Value = Today
-        '------------------------------------------------------------------------------
-
         '--------- CUSTOMER SERVICE HISTORY -------------------------------------------
         For Each Customer In Customers
             Dim Item As New ListViewItem(Trim(Customer.Forename) & " " & Trim(Customer.Surname), 0)
@@ -64,9 +60,12 @@
     '--------- SELECTING REPORT TYPE --------------------------------------------------------------
     Private Sub cboReportType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboReportType.SelectedIndexChanged
 
+        ltvReport.Sorting = SortOrder.None
         btnDisplayReport.Visible = True
         grpCustServHistory.Visible = False
         grpAppForDate.Visible = False
+        grpServiceReport.Visible = False
+        grpAppForDateRange.Visible = False
         btnDisplayReport.Visible = False
         lbl1.Visible = False
         ltvReport.Columns.Clear()
@@ -98,9 +97,15 @@
                 End If
                 ltvCustName.Focus()
             Case 3
+                grpServiceReport.Visible = True
                 ServicesByPopularityReport()
                 ltvReport.Focus()
             Case 4
+                grpAppForDateRange.Visible = True
+                dtpStartDate.Value = Today
+                dtpEndDate.Value = Today.AddDays(1)
+                ReportAppointmentsForDateRange(dtpStartDate.Value, dtpEndDate.Value)
+                ltvReport.Focus()
             Case 5
         End Select
 
@@ -115,14 +120,12 @@
                 Dim CustomerID As Integer = ltvCustName.SelectedItems(0).SubItems(1).Text
                 Dim CustomerName As String = ltvCustName.SelectedItems(0).Text
                 ReportCustomerServiceHistory(CustomerID, CustomerName)
-                If Trim(cboCustomerName.Text) <> "" Then cboCustomerName.Items.Add(Trim(cboCustomerName.Text))
-                cboCustomerName.Focus()
+                txtCustomerName.Focus()
             Case 2
                 Dim CustomerID As Integer = ltvCustName.SelectedItems(0).SubItems(1).Text
                 Dim CustomerName As String = ltvCustName.SelectedItems(0).Text
                 ReportCustomerAppHistory(CustomerID, CustomerName)
-                If Trim(cboCustomerName.Text) <> "" Then cboCustomerName.Items.Add(Trim(cboCustomerName.Text))
-                cboCustomerName.Focus()
+                txtCustomerName.Focus()
             Case 3
             Case 4
             Case 5
@@ -181,6 +184,8 @@
             End If
 
         Next
+
+        ltvReport.Sorting = SortOrder.Ascending
 
         If ltvReport.Items.Count = 0 Then
             ltvReport.Columns.Clear()
@@ -247,21 +252,24 @@
         Next
 
     End Sub
+    '----------------------------------------------------------------------------------------------
 
+    '--------- SERVICE TREND REPORT ---------------------------------------------------------------
     Private Sub ServicesByPopularityReport()
 
         ltvReport.Items.Clear()
         ltvReport.Columns.Clear()
 
-        ltvReport.Columns.Add("Service", 300, HorizontalAlignment.Left)
-        ltvReport.Columns.Add("Times Booked", 180, HorizontalAlignment.Left)
+        ltvReport.Columns.Add("Ranking", 90, HorizontalAlignment.Left)
+        ltvReport.Columns.Add("Service", 200, HorizontalAlignment.Left)
+        ltvReport.Columns.Add("Times Booked", 150, HorizontalAlignment.Left)
         ltvReport.Columns.Add("Total cash grabbed", 180, HorizontalAlignment.Left)
-
+        Dim Rank As Integer = 1
         For Each Service In Services
 
             Dim CashGrabbed As Decimal = 0
             Dim TimesBooked As Integer = 0
-            Dim Item As New ListViewItem(Trim(Service.Name), 0)
+            Dim Item As New ListViewItem(Rank.ToString("D3"), 0)
 
             For Each AppService In AppServices
 
@@ -272,18 +280,86 @@
 
             Next
 
+            Item.SubItems.Add(Trim(Service.Name))
             Item.SubItems.Add(TimesBooked)
             Item.SubItems.Add("£" & CashGrabbed)
             ltvReport.Items.Add(Item)
+
+            Rank += 1
         Next
+
+    End Sub
+    '----------------------------------------------------------------------------------------------
+
+    '--------- APPOINTMENTS FOR RANGE OF DATES REPORT ---------------------------------------------
+    Private Sub ReportAppointmentsForDateRange(ByVal StartDate As Date, ByVal EndDate As Date)
+
+        If EndDate >= StartDate Then
+
+            ltvReport.Items.Clear()
+            ltvReport.Columns.Clear()
+
+            ltvReport.Columns.Add("Date", 130, HorizontalAlignment.Left)
+            ltvReport.Columns.Add("Time", 100, HorizontalAlignment.Left)
+            ltvReport.Columns.Add("Customer", 200, HorizontalAlignment.Left)
+            ltvReport.Columns.Add("Services", 320, HorizontalAlignment.Left)
+            ltvReport.Columns.Add("Total Price", 180, HorizontalAlignment.Left)
+
+            For Each Appointment In Appointments
+
+                If (Appointment.AppDate >= StartDate) And (Appointment.AppDate <= EndDate) Then
+
+                    Dim Item As New ListViewItem(Appointment.AppDate.ToShortDateString, 0)
+                    Item.SubItems.Add(Trim(Appointment.AppTime))
+                    Item.SubItems.Add(Trim(Appointment.CustomerName))
+
+                    Dim ServiceString As String = ""
+                    Dim TotalPrice As Decimal = 0
+
+                    For Each AppService In AppServices
+
+                        If AppService.AppID = Appointment.ID And Trim(AppService.ServiceName) <> "x" Then
+
+                            If ServiceString = "" Then
+                                ServiceString += Trim(AppService.ServiceName)
+                            Else
+                                ServiceString += ", " & Trim(AppService.ServiceName)
+                            End If
+
+                            For Each Service In Services
+                                If Trim(Service.Name) = Trim(AppService.ServiceName) Then
+                                    TotalPrice += Service.Price
+                                End If
+                            Next
+
+                        End If
+
+                    Next
+
+                    Item.SubItems.Add(ServiceString)
+                    Item.SubItems.Add("£" & TotalPrice)
+                    ltvReport.Items.Add(Item)
+
+                End If
+
+            Next
+
+            ltvReport.Sorting = SortOrder.Ascending
+            If ltvReport.Items.Count = 0 Then
+                ltvReport.Columns.Clear()
+                ltvReport.Columns.Add("", 750, HorizontalAlignment.Left)
+                ltvReport.Items.Add("No Appointments booked for " & StartDate.ToLongDateString & " to " & EndDate.ToLongDateString)
+            End If
+
+        End If
 
     End Sub
     '----------------------------------------------------------------------------------------------
 
     '################################################################### REPORTS END ################################################################
 
-    Private Sub cboCustomerName_TextChanged(sender As Object, e As EventArgs) Handles cboCustomerName.TextChanged
-        RefreshltvCustName(Trim(cboCustomerName.Text))
+    Private Sub cboCustomerName_TextChanged(sender As Object, e As EventArgs) Handles txtCustomerName.TextChanged
+        RefreshltvCustName(Trim(txtCustomerName.Text))
     End Sub
 
     '--------- DISPLAY REPORTS ON CUSTOMER LIST VIEW CLICK ----------------------------------------
@@ -362,6 +438,31 @@
             ltvReport.GridLines = True
         Else
             ltvReport.GridLines = False
+        End If
+    End Sub
+
+    Private Sub radSortNumber_CheckedChanged(sender As Object, e As EventArgs) Handles radSortNumber.CheckedChanged
+        If radSortNumber.Checked = True Then
+            'SORT SERVICES BY POP
+
+        End If
+    End Sub
+
+    Private Sub radSortProfit_CheckedChanged(sender As Object, e As EventArgs) Handles radSortProfit.CheckedChanged
+        If radSortProfit.Checked = True Then
+            'SORT SERVICES BY CASH
+        End If
+    End Sub
+
+    Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.ValueChanged
+        If dtpStartDate.Value <= dtpEndDate.Value Then
+            ReportAppointmentsForDateRange(dtpStartDate.Value, dtpEndDate.Value)
+        End If
+    End Sub
+
+    Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.ValueChanged
+        If dtpStartDate.Value <= dtpEndDate.Value Then
+            ReportAppointmentsForDateRange(dtpStartDate.Value, dtpEndDate.Value)
         End If
     End Sub
 
