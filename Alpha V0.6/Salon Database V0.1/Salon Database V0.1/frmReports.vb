@@ -302,8 +302,8 @@
             ltvReport.Columns.Add("Date", 130, HorizontalAlignment.Left)
             ltvReport.Columns.Add("Time", 100, HorizontalAlignment.Left)
             ltvReport.Columns.Add("Customer", 200, HorizontalAlignment.Left)
-            ltvReport.Columns.Add("Services", 320, HorizontalAlignment.Left)
-            ltvReport.Columns.Add("Total Price", 180, HorizontalAlignment.Left)
+            ltvReport.Columns.Add("Services", 250, HorizontalAlignment.Left)
+            ltvReport.Columns.Add("Total Price", 140, HorizontalAlignment.Left)
 
             For Each Appointment In Appointments
 

@@ -33,6 +33,7 @@ Module modMain
     Public ServiceMaxID As Integer 'highest ID number for customers
 
     Public Structure Appointment
+        <VBFixedString(100)> Dim Comment As String
         Dim ID As Integer
         Dim CustomerID As Integer
         <VBFixedString(41)> Dim CustomerName As String

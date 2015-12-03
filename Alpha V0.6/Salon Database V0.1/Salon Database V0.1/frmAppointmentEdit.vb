@@ -3,9 +3,41 @@ Imports System.IO
 
 Public Class frmAppointmentEdit
 
+    Dim CustomerRecordsCount As Integer = 0
+    Dim ServiceRecordsCount As Integer = 0
+    Dim AppRecordsCount As Integer = 0
+    Dim AppSerRecordsCount As Integer = 0
+
+    Dim Customers As New List(Of Customer)
+    Dim Services As New List(Of Service)
+    Dim Appointments As New List(Of Appointment)
+    Dim AppServices As New List(Of AppService)
+
     Private Sub frmAppointmentEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        FileOpen(1, CustomerFilePath, OpenMode.Random, , , Len(CustomerRecord))
+        FileOpen(2, ServiceFilePath, OpenMode.Random, , , Len(ServiceRecord))
         FileOpen(4, AppServFilePath, OpenMode.Random, , , Len(AppSerRecord))
+
+        For i = 1 To LOF(1) / Len(CustomerRecord)
+            FileGet(1, CustomerRecord, i)
+            Customers.Add(CustomerRecord)
+        Next
+
+        For i = 1 To LOF(2) / Len(ServiceRecord)
+            FileGet(2, ServiceRecord, i)
+            Services.Add(ServiceRecord)
+        Next
+
+        For i = 1 To LOF(3) / Len(AppointmentRecord)
+            FileGet(3, AppointmentRecord, i)
+            Appointments.Add(AppointmentRecord)
+        Next
+
+        For i = 1 To LOF(4) / Len(AppSerRecord)
+            FileGet(4, AppSerRecord, i)
+            AppServices.Add(AppSerRecord)
+        Next
 
         MaxAppServiceRecordNumber = 1
 
@@ -13,27 +45,24 @@ Public Class frmAppointmentEdit
             MaxAppServiceRecordNumber = LOF(4) / Len(AppSerRecord) + 1
         End If
 
-        cboCustomer.DisplayMember = "Name"
-        cboCustomer.ValueMember = "Id"
+        CustomerRecordsCount = Customers.Count - 1
+        ServiceRecordsCount = Services.Count - 1
+        AppRecordsCount = Appointments.Count - 1
+        AppSerRecordsCount = AppServices.Count - 1
 
-        FileOpen(1, CustomerFilePath, OpenMode.Random, , , Len(CustomerRecord))
-        Dim AddString As String
-        For i = 1 To LOF(1) / Len(CustomerRecord)
-            FileGet(1, CustomerRecord, i)
-            AddString = Trim(CustomerRecord.Forename) & " " & Trim(CustomerRecord.Surname)
-            cboCustomer.Items.Add(New With {.Name = AddString, .Id = CustomerRecord.ID})
+        For Each Customer In Customers
+            Dim Item As New ListViewItem(Trim(Customer.Forename) & " " & Trim(Customer.Surname), 0)
+            Item.SubItems.Add(Customer.ID)
+            ltvCustName.Items.Add(Item)
         Next
+        ltvCustName.Items(0).Selected = True
 
-        FileOpen(2, ServiceFilePath, OpenMode.Random, , , Len(ServiceRecord))
-        For i = 1 To LOF(2) / Len(ServiceRecord)
-            FileGet(2, ServiceRecord, i)
-            cboService1.Items.Add(Trim(ServiceRecord.Name))
-            cboService2.Items.Add(Trim(ServiceRecord.Name))
-            cboService3.Items.Add(Trim(ServiceRecord.Name))
-            cboService4.Items.Add(Trim(ServiceRecord.Name))
+        For Each Service In Services
+            cboService1.Items.Add(Trim(Service.Name))
+            cboService2.Items.Add(Trim(Service.Name))
+            cboService3.Items.Add(Trim(Service.Name))
+            cboService4.Items.Add(Trim(Service.Name))
         Next
-
-        cboCustomer.SelectedIndex = 0
 
         If Editing = False Then
             dtpDate.MinDate = Date.Today
@@ -41,54 +70,46 @@ Public Class frmAppointmentEdit
         End If
 
         If Editing = True Then
-
             cboService1.SelectedIndex = -1
             lblCurrentRecord.Text = CurrentAppRNum
             ReadRecord()
-
         Else
-
-            lblCurrentRecord.Text = LOF(3) / Len(AppointmentRecord) + 1
+            lblCurrentRecord.Text = AppRecordsCount + 2
             lblRecordID.Text = AppMaxID + 1
-
         End If
 
     End Sub
 
     Private Sub ReadRecord()
 
-        Dim ServiceName As String
-
         FileGet(3, AppointmentRecord, CInt(lblCurrentRecord.Text))
 
-        For i = 1 To LOF(4) / Len(AppSerRecord)
+        For Each AppService In AppServices
 
-            FileGet(4, AppSerRecord, i)
+            If AppService.AppID = AppointmentRecord.ID Then
 
-            If AppSerRecord.AppID = AppointmentRecord.ID Then
+                Dim Index As Integer = 0
 
-                ServiceName = AppSerRecord.ServiceName
+                For Each Service In Services
 
-                For j = 1 To LOF(2) / Len(ServiceRecord)
+                    If Trim(Service.Name) = Trim(AppService.ServiceName) Then
 
-                    FileGet(2, ServiceRecord, j)
-
-                    If ServiceRecord.Name = ServiceName Then
-
-                        Select Case AppSerRecord.RecordNumber
+                        Select Case AppService.RecordNumber
                             Case 1
-                                cboService1.SelectedIndex = j - 1
+                                cboService1.SelectedIndex = Index
                             Case 2
-                                cboService2.SelectedIndex = j - 1
+                                cboService2.SelectedIndex = Index
                             Case 3
-                                cboService3.SelectedIndex = j - 1
+                                cboService3.SelectedIndex = Index
                             Case 4
-                                cboService4.SelectedIndex = j - 1
+                                cboService4.SelectedIndex = Index
                         End Select
 
                         Exit For
 
                     End If
+
+                    Index += 1
 
                 Next
 
@@ -101,12 +122,13 @@ Public Class frmAppointmentEdit
             lblRecordID.Text = .ID
             dtpDate.Text = .AppDate
             dtpTime.Text = .AppTime
-            For i = 1 To LOF(1) / Len(CustomerRecord)
-                FileGet(1, CustomerRecord, i)
-                If (Trim(CustomerRecord.Forename) & " " & Trim(CustomerRecord.Surname)) = Trim(.CustomerName) Then
-                    cboCustomer.SelectedIndex = i - 1
+            Dim Index As Integer = 0
+            For Each Customer In Customers
+                If (Trim(Customer.Forename) & " " & Trim(Customer.Surname)) = Trim(.CustomerName) Then
+                    ltvCustName.Items(Index).Selected = True
                     Exit For
                 End If
+                Index += 1
             Next
 
         End With
@@ -119,26 +141,27 @@ Public Class frmAppointmentEdit
 
         Dim DeleteService As Boolean = False
         Dim RecordSaved As Boolean = False
-        Dim CurrentRNum As Integer = 0
 
         If ServiceName = "" Then
             ServiceName = "x"
             DeleteService = True
         End If
 
-        If LOF(4) / Len(AppSerRecord) <> 0 Then
+        If Services.Count <> 0 Then
 
-            For i = 1 To LOF(4) / Len(AppSerRecord)
-                FileGet(4, AppSerRecord, i)
-                CurrentRNum = i
+            Dim Index As Integer = 1
 
-                If AppSerRecord.AppID = AppointmentID Then
+            For Each AppService In AppServices
 
-                    If Trim(AppSerRecord.ServiceName) = ServiceName Then
+                FileGet(4, AppSerRecord, Index)
 
-                        If AppSerRecord.RecordNumber <> RecordNumber Then
+                If AppService.AppID = AppointmentID Then
+
+                    If Trim(AppService.ServiceName) = ServiceName Then
+
+                        If AppService.RecordNumber <> RecordNumber Then
                             AppSerRecord.RecordNumber = RecordNumber
-                            FilePut(4, AppSerRecord, CurrentRNum)
+                            FilePut(4, AppSerRecord, Index)
                             RecordSaved = True
                             Exit For
                         Else
@@ -146,18 +169,18 @@ Public Class frmAppointmentEdit
                             Exit For
                         End If
 
-                    ElseIf AppSerRecord.RecordNumber = RecordNumber
+                    ElseIf AppService.RecordNumber = RecordNumber
 
                         If DeleteService = False Then
                             AppSerRecord.ServiceName = ServiceName
-                            FilePut(4, AppSerRecord, CurrentRNum)
+                            FilePut(4, AppSerRecord, Index)
                             RecordSaved = True
                             Exit For
                         Else
                             '      DELETE THE FOUND RECORD
                             '------------------------------------
                             AppSerRecord.ServiceName = "x"
-                            FilePut(4, AppSerRecord, CurrentRNum)
+                            FilePut(4, AppSerRecord, Index)
                             '------------------------------------
                             RecordSaved = True
                             Exit For
@@ -166,6 +189,8 @@ Public Class frmAppointmentEdit
                     End If
 
                 End If
+
+                Index += 1
 
             Next
 
@@ -208,11 +233,11 @@ Public Class frmAppointmentEdit
         SaveService(Trim(cboService4.Text), 4, CInt(lblRecordID.Text))
 
         With AppointmentRecord 'write into record
-            .CustomerID = cboCustomer.SelectedItem.Id
+            .CustomerID = ltvCustName.SelectedItems(0).SubItems(1).Text
             .ID = lblRecordID.Text
             .AppDate = dtpDate.Text
             .AppTime = dtpTime.Text
-            .CustomerName = cboCustomer.Text
+            .CustomerName = ltvCustName.SelectedItems(0).Text
         End With
 
         If Editing = False Then
@@ -225,6 +250,20 @@ Public Class frmAppointmentEdit
         End If
 
         FilePut(3, AppointmentRecord, CInt(lblCurrentRecord.Text)) 'Save the record
+
+        AppServices.Clear()
+        For i = 1 To LOF(4) / Len(AppSerRecord)
+            FileGet(4, AppSerRecord, i)
+            AppServices.Add(AppSerRecord)
+        Next
+        AppSerRecordsCount = AppServices.Count - 1
+
+        Appointments.Clear()
+        For i = 1 To LOF(3) / Len(AppointmentRecord)
+            FileGet(3, AppointmentRecord, i)
+            Appointments.Add(AppointmentRecord)
+        Next
+        AppRecordsCount = Appointments.Count - 1
 
         CurrentAppRNum = lblCurrentRecord.Text
         CloseEditForm()
@@ -240,7 +279,6 @@ Public Class frmAppointmentEdit
             With AppointmentRecord
                 If .AppDate <> dtpDate.Text Then UnsavedChanges = True
                 If Trim(.AppTime) <> Trim(dtpTime.Text) Then UnsavedChanges = True
-                If Trim(.CustomerName) <> Trim(cboCustomer.Text) Then UnsavedChanges = True
             End With
 
             If UnsavedChanges = True Then 'if user hasn't saved their changes show alert
@@ -255,17 +293,38 @@ Public Class frmAppointmentEdit
         Else
 
             'if user hasn't saved their changes show alert
-            AlertType = "notSaved"
-            CallingForm = Me
-            frmUnsavedAlert.Show()
-            Me.Enabled = False
+            'AlertType = "notSaved"
+            'CallingForm = Me
+            'frmUnsavedAlert.Show()
+            'Me.Enabled = False
+            CloseEditForm()
 
         End If
 
     End Sub
 
+    Private Sub RefreshltvCustName(ByVal SearchString As String)
+
+        ltvCustName.Items.Clear()
+
+        For i = 1 To LOF(1) / Len(CustomerRecord)
+            FileGet(1, CustomerRecord, i)
+            If (Trim(CustomerRecord.Forename) & " " & Trim(CustomerRecord.Surname)).ToLower.Contains(SearchString) Then
+                Dim Item As New ListViewItem(Trim(CustomerRecord.Forename) & " " & Trim(CustomerRecord.Surname), 0)
+                Item.SubItems.Add(CustomerRecord.ID)
+                ltvCustName.Items.Add(Item)
+            End If
+        Next
+
+        If ltvCustName.Items.Count <> 0 Then
+            ltvCustName.Items(0).Selected = True
+        End If
+
+    End Sub
     Private Sub btnSave_Click_1(sender As Object, e As EventArgs) Handles btnSave.Click
-        SaveRecord()
+        If ltvCustName.Items.Count <> 0 Then
+            SaveRecord()
+        End If
     End Sub
 
     Private Sub CloseEditForm()
@@ -360,6 +419,10 @@ Public Class frmAppointmentEdit
             End If
         Next
 
+    End Sub
+
+    Private Sub txtCustName_TextChanged(sender As Object, e As EventArgs) Handles txtCustName.TextChanged
+        RefreshltvCustName(txtCustName.Text.ToLower)
     End Sub
 
 End Class

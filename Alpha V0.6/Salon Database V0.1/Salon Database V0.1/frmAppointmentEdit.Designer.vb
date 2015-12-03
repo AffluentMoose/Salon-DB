@@ -24,6 +24,7 @@ Partial Class frmAppointmentEdit
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAppointmentEdit))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnClearServ4 = New System.Windows.Forms.Button()
         Me.btnClearServ3 = New System.Windows.Forms.Button()
@@ -32,6 +33,7 @@ Partial Class frmAppointmentEdit
         Me.cboService3 = New System.Windows.Forms.ComboBox()
         Me.cboService2 = New System.Windows.Forms.ComboBox()
         Me.cboService1 = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.lblRecordID = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -39,12 +41,14 @@ Partial Class frmAppointmentEdit
         Me.Label12 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.cboCustomer = New System.Windows.Forms.ComboBox()
+        Me.txtCustName = New System.Windows.Forms.TextBox()
         Me.dtpTime = New System.Windows.Forms.DateTimePicker()
         Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.ltvCustName = New System.Windows.Forms.ListView()
+        Me.ColName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lblCurrentRecord = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
@@ -55,7 +59,9 @@ Partial Class frmAppointmentEdit
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.TextBox1)
         Me.Panel1.Controls.Add(Me.GroupBox2)
+        Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.lblRecordID)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label13)
@@ -67,8 +73,19 @@ Partial Class frmAppointmentEdit
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Location = New System.Drawing.Point(12, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(657, 452)
+        Me.Panel1.Size = New System.Drawing.Size(929, 493)
         Me.Panel1.TabIndex = 1
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
+        Me.TextBox1.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.ForeColor = System.Drawing.SystemColors.Info
+        Me.TextBox1.Location = New System.Drawing.Point(554, 267)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(342, 104)
+        Me.TextBox1.TabIndex = 101
         '
         'GroupBox2
         '
@@ -82,7 +99,7 @@ Partial Class frmAppointmentEdit
         Me.GroupBox2.Controls.Add(Me.cboService1)
         Me.GroupBox2.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.GroupBox2.Location = New System.Drawing.Point(22, 264)
+        Me.GroupBox2.Location = New System.Drawing.Point(456, 83)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(440, 175)
         Me.GroupBox2.TabIndex = 95
@@ -177,6 +194,17 @@ Partial Class frmAppointmentEdit
         Me.cboService1.Size = New System.Drawing.Size(381, 27)
         Me.cboService1.TabIndex = 94
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.White
+        Me.Label3.Location = New System.Drawing.Point(452, 268)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(99, 22)
+        Me.Label3.TabIndex = 100
+        Me.Label3.Text = "Comment:"
+        '
         'lblRecordID
         '
         Me.lblRecordID.AutoSize = True
@@ -205,7 +233,7 @@ Partial Class frmAppointmentEdit
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.Color.White
-        Me.Label13.Location = New System.Drawing.Point(533, 413)
+        Me.Label13.Location = New System.Drawing.Point(812, 453)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(61, 19)
         Me.Label13.TabIndex = 83
@@ -217,7 +245,7 @@ Partial Class frmAppointmentEdit
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
         Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
-        Me.btnCancel.Location = New System.Drawing.Point(482, 399)
+        Me.btnCancel.Location = New System.Drawing.Point(761, 439)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(45, 45)
         Me.btnCancel.TabIndex = 82
@@ -228,7 +256,7 @@ Partial Class frmAppointmentEdit
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.Color.White
-        Me.Label12.Location = New System.Drawing.Point(533, 351)
+        Me.Label12.Location = New System.Drawing.Point(812, 402)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(101, 19)
         Me.Label12.TabIndex = 81
@@ -240,7 +268,7 @@ Partial Class frmAppointmentEdit
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.ForeColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
         Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
-        Me.btnSave.Location = New System.Drawing.Point(482, 337)
+        Me.btnSave.Location = New System.Drawing.Point(761, 388)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(45, 45)
         Me.btnSave.TabIndex = 80
@@ -249,44 +277,43 @@ Partial Class frmAppointmentEdit
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(61, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(124, Byte), Integer))
-        Me.GroupBox1.Controls.Add(Me.cboCustomer)
+        Me.GroupBox1.Controls.Add(Me.txtCustName)
         Me.GroupBox1.Controls.Add(Me.dtpTime)
         Me.GroupBox1.Controls.Add(Me.dtpDate)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.ltvCustName)
         Me.GroupBox1.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.White
         Me.GroupBox1.Location = New System.Drawing.Point(22, 83)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(440, 175)
+        Me.GroupBox1.Size = New System.Drawing.Size(417, 401)
         Me.GroupBox1.TabIndex = 78
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Required fields"
+        Me.GroupBox1.Text = "Appointment Details"
         '
-        'cboCustomer
+        'txtCustName
         '
-        Me.cboCustomer.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.cboCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cboCustomer.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!)
-        Me.cboCustomer.ForeColor = System.Drawing.Color.White
-        Me.cboCustomer.FormattingEnabled = True
-        Me.cboCustomer.Location = New System.Drawing.Point(157, 125)
-        Me.cboCustomer.Name = "cboCustomer"
-        Me.cboCustomer.Size = New System.Drawing.Size(256, 27)
-        Me.cboCustomer.TabIndex = 94
+        Me.txtCustName.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
+        Me.txtCustName.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCustName.ForeColor = System.Drawing.SystemColors.Info
+        Me.txtCustName.Location = New System.Drawing.Point(106, 36)
+        Me.txtCustName.Name = "txtCustName"
+        Me.txtCustName.Size = New System.Drawing.Size(297, 27)
+        Me.txtCustName.TabIndex = 99
         '
         'dtpTime
         '
         Me.dtpTime.CalendarForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.dtpTime.CalendarMonthBackground = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
+        Me.dtpTime.CustomFormat = "00:00"
         Me.dtpTime.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!)
         Me.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.dtpTime.Location = New System.Drawing.Point(157, 85)
+        Me.dtpTime.Location = New System.Drawing.Point(106, 352)
         Me.dtpTime.Name = "dtpTime"
         Me.dtpTime.ShowUpDown = True
-        Me.dtpTime.Size = New System.Drawing.Size(113, 27)
+        Me.dtpTime.Size = New System.Drawing.Size(111, 27)
         Me.dtpTime.TabIndex = 87
         '
         'dtpDate
@@ -294,43 +321,65 @@ Partial Class frmAppointmentEdit
         Me.dtpDate.CalendarForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.dtpDate.CalendarMonthBackground = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
         Me.dtpDate.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!)
-        Me.dtpDate.Location = New System.Drawing.Point(157, 48)
+        Me.dtpDate.Location = New System.Drawing.Point(106, 315)
         Me.dtpDate.Name = "dtpDate"
-        Me.dtpDate.Size = New System.Drawing.Size(200, 27)
+        Me.dtpDate.Size = New System.Drawing.Size(188, 27)
         Me.dtpDate.TabIndex = 86
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(8, 54)
+        Me.Label2.Location = New System.Drawing.Point(8, 319)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(43, 19)
+        Me.Label2.Size = New System.Drawing.Size(49, 22)
         Me.Label2.TabIndex = 19
         Me.Label2.Text = "Date"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(8, 128)
+        Me.Label7.Location = New System.Drawing.Point(8, 38)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(80, 19)
+        Me.Label7.Size = New System.Drawing.Size(94, 22)
         Me.Label7.TabIndex = 28
         Me.Label7.Text = "Customer"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(8, 91)
+        Me.Label1.Location = New System.Drawing.Point(8, 356)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(45, 19)
+        Me.Label1.Size = New System.Drawing.Size(51, 22)
         Me.Label1.TabIndex = 20
         Me.Label1.Text = "Time"
+        '
+        'ltvCustName
+        '
+        Me.ltvCustName.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
+        Me.ltvCustName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ltvCustName.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColName})
+        Me.ltvCustName.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 12.0!)
+        Me.ltvCustName.ForeColor = System.Drawing.Color.White
+        Me.ltvCustName.FullRowSelect = True
+        Me.ltvCustName.HideSelection = False
+        Me.ltvCustName.Location = New System.Drawing.Point(106, 36)
+        Me.ltvCustName.MultiSelect = False
+        Me.ltvCustName.Name = "ltvCustName"
+        Me.ltvCustName.Size = New System.Drawing.Size(297, 252)
+        Me.ltvCustName.TabIndex = 98
+        Me.ltvCustName.UseCompatibleStateImageBehavior = False
+        Me.ltvCustName.View = System.Windows.Forms.View.Details
+        '
+        'ColName
+        '
+        Me.ColName.Text = ""
+        Me.ColName.Width = 450
         '
         'lblCurrentRecord
         '
@@ -360,7 +409,7 @@ Partial Class frmAppointmentEdit
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ClientSize = New System.Drawing.Size(681, 476)
+        Me.ClientSize = New System.Drawing.Size(953, 517)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmAppointmentEdit"
@@ -390,7 +439,6 @@ Partial Class frmAppointmentEdit
     Friend WithEvents Label4 As Label
     Friend WithEvents dtpTime As DateTimePicker
     Friend WithEvents dtpDate As DateTimePicker
-    Friend WithEvents cboCustomer As ComboBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents cboService4 As ComboBox
     Friend WithEvents cboService3 As ComboBox
@@ -399,4 +447,9 @@ Partial Class frmAppointmentEdit
     Friend WithEvents btnClearServ4 As Button
     Friend WithEvents btnClearServ3 As Button
     Friend WithEvents btnClearServ2 As Button
+    Friend WithEvents ltvCustName As ListView
+    Friend WithEvents ColName As ColumnHeader
+    Friend WithEvents txtCustName As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label3 As Label
 End Class
