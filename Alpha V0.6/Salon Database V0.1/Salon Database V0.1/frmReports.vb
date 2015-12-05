@@ -12,6 +12,8 @@
 
     Private Sub frmReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        RefreshScheme()
+
         '--------- PREPARE STUFF ------------------------------------------------------
         FileOpen(1, CustomerFilePath, OpenMode.Random, , , Len(CustomerRecord))
         FileOpen(2, ServiceFilePath, OpenMode.Random, , , Len(ServiceRecord))
@@ -52,6 +54,7 @@
             Item.SubItems.Add(Customer.ID)
             ltvCustName.Items.Add(Item)
         Next
+
         ltvCustName.Items(0).Selected = True
         '------------------------------------------------------------------------------
 
@@ -201,6 +204,7 @@
 
         ltvReport.Items.Clear()
         ltvReport.Items.Add("SERVICE HSTORY  :  " & Trim(CustName).ToUpper)
+        Dim ServicePrice As Integer
 
         Dim AppointmentID As Integer
 
@@ -217,7 +221,14 @@
 
                     If AppService.AppID = AppointmentID Then
                         If Trim(AppService.ServiceName) <> "x" Then
-                            ltvReport.Items.Add(Space(1) & Trim(AppService.ServiceName) & "")
+
+                            For Each Service In Services
+                                If Service.Name = AppService.ServiceName Then
+                                    ServicePrice = Service.Price
+                                    Exit For
+                                End If
+                            Next
+                            ltvReport.Items.Add(Space(1) & Trim(AppService.ServiceName) & "  -  £" & ServicePrice.ToString("00.00"))
                         End If
                     End If
 
@@ -246,6 +257,7 @@
 
                 ltvReport.Items.Add("")
                 ltvReport.Items.Add(Trim(Appointment.AppDate.ToLongDateString))
+                ltvReport.Items.Add(Trim(" - " & Appointment.Comment))
 
             End If
 
@@ -463,6 +475,121 @@
     Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.ValueChanged
         If dtpStartDate.Value <= dtpEndDate.Value Then
             ReportAppointmentsForDateRange(dtpStartDate.Value, dtpEndDate.Value)
+        End If
+    End Sub
+
+    Private Sub RefreshScheme()
+
+        Select Case Scheme
+            Case "d"
+                SetScheme(Color.FromArgb(255, 33, 33, 33), Color.FromArgb(255, 48, 48, 48), Color.FromArgb(255, 66, 66, 66), Color.Black)
+            Case "p"
+                SetScheme(Color.FromArgb(255, 61, 37, 124), Color.FromArgb(255, 40, 18, 98), Color.FromArgb(255, 40, 18, 98), Color.FromArgb(255, 83, 59, 145))
+            Case Else
+                SetSchemeWhite(Color.FromArgb(255, 245, 245, 245), Color.FromArgb(255, 250, 250, 250), Color.FromArgb(255, 250, 250, 250), Color.FromArgb(255, 224, 224, 224))
+        End Select
+
+    End Sub
+
+    Private Sub SetScheme(ByVal Color1 As Color, ByVal Color2 As Color, ByVal Color3 As Color, ByVal Color4 As Color)
+        For Each Ctrl As Control In Me.Controls
+            Me.BackColor = Color4
+            Ctrl.BackColor = Color1
+            Ctrl.ForeColor = Color.White
+            If TypeOf Ctrl Is Button Then
+                Ctrl.BackColor = Color4
+                Ctrl.ForeColor = Color4
+            ElseIf TypeOf Ctrl Is Label
+                Ctrl.BackColor = Color4
+            ElseIf TypeOf Ctrl Is TextBox Or TypeOf Ctrl Is ComboBox
+                Ctrl.BackColor = Color2
+            ElseIf TypeOf Ctrl Is Panel Or TypeOf Ctrl Is GroupBox
+                For Each Ctrol As Control In Ctrl.Controls
+                    Ctrol.ForeColor = Color.White
+                    If TypeOf Ctrol Is Button Then
+                        Ctrol.BackColor = Color1
+                        Ctrol.ForeColor = Color1
+                    ElseIf TypeOf Ctrol Is Label
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is TextBox Or TypeOf Ctrol Is ComboBox
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is Panel Or TypeOf Ctrol Is GroupBox
+                        Ctrol.BackColor = Color3
+                        For Each Cntrol As Control In Ctrol.Controls
+                            Cntrol.ForeColor = Color.White
+                            If TypeOf Cntrol Is Button Or TypeOf Cntrol Is Label Or TypeOf Cntrol Is RadioButton Then
+                                Cntrol.BackColor = Color3
+                                Cntrol.ForeColor = Color.White
+                            ElseIf TypeOf Cntrol Is ListView Or TypeOf Cntrol Is TextBox
+                                Cntrol.BackColor = Color1
+                            End If
+                        Next
+                    End If
+                Next
+            ElseIf TypeOf Ctrl Is ListView
+                If Scheme = "p" Then
+                    Ctrl.BackColor = Color.FromArgb(255, 40, 18, 98)
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub SetSchemeWhite(ByVal Color1 As Color, ByVal Color2 As Color, ByVal Color3 As Color, ByVal Color4 As Color)
+        For Each Ctrl As Control In Me.Controls
+            Me.BackColor = Color4
+            Ctrl.BackColor = Color1
+            Ctrl.ForeColor = Color.Black
+            If TypeOf Ctrl Is Button Then
+                Ctrl.BackColor = Color.DarkGray
+                Ctrl.ForeColor = Color.Black
+            ElseIf TypeOf Ctrl Is Label
+                Ctrl.BackColor = Color4
+            ElseIf TypeOf Ctrl Is TextBox Or TypeOf Ctrl Is ComboBox
+                Ctrl.BackColor = Color2
+            ElseIf TypeOf Ctrl Is Panel Or TypeOf Ctrl Is GroupBox
+                For Each Ctrol As Control In Ctrl.Controls
+                    Ctrol.ForeColor = Color.Black
+                    If TypeOf Ctrol Is Button Then
+                        Ctrol.BackColor = Color.DarkGray
+                        Ctrol.ForeColor = Color.Black
+                    ElseIf TypeOf Ctrol Is Label
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is TextBox Or TypeOf Ctrol Is ComboBox
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is Panel Or TypeOf Ctrol Is GroupBox
+                        Ctrol.BackColor = Color.FromArgb(255, 190, 190, 190)
+                        For Each Cntrol As Control In Ctrol.Controls
+                            Cntrol.ForeColor = Color.Black
+                            Cntrol.BackColor = Color.FromArgb(255, 215, 215, 215)
+                            If TypeOf Cntrol Is Button Or TypeOf Cntrol Is Label Or TypeOf Cntrol Is RadioButton Then
+                                Cntrol.BackColor = Color.FromArgb(255, 190, 190, 190)
+                                Cntrol.ForeColor = Color.Black
+                            ElseIf TypeOf Cntrol Is TextBox
+                                Cntrol.BackColor = Color.FromArgb(255, 150, 150, 150)
+                            End If
+                        Next
+                    End If
+                Next
+            ElseIf TypeOf Ctrl Is ListView
+                Ctrl.BackColor = Color.FromArgb(255, 215, 215, 215)
+            End If
+        Next
+    End Sub
+
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+        CallingForm = Me
+        frmSettings.Show()
+        Me.Enabled = False
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Application.Exit()
+    End Sub
+
+    Private Sub frmReports_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged
+        If ReturnAction = "scheme" Then
+            RefreshScheme()
         End If
     End Sub
 

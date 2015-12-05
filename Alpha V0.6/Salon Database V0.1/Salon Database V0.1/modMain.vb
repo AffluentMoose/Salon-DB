@@ -62,5 +62,8 @@ Module modMain
     Public Editing As Boolean ' used for customer edit form
     Public ItemProgress As Integer 'for printing
 
+    Public Scheme As Char
+    Public SchemeFile As String = CurDir() & "\Scheme.txt" 'scheme file
+
 End Module
 

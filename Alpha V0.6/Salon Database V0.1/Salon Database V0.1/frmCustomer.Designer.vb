@@ -62,6 +62,8 @@ Partial Class frmCustomer
         Me.colEmail = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Address1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Address2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSettings = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -487,12 +489,35 @@ Partial Class frmCustomer
         Me.Address2.Text = "Address 2"
         Me.Address2.Width = 200
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(1096, 308)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(86, 35)
+        Me.Button1.TabIndex = 86
+        Me.Button1.Text = "call stuff"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'btnSettings
+        '
+        Me.btnSettings.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
+        Me.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSettings.ForeColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
+        Me.btnSettings.Image = CType(resources.GetObject("btnSettings.Image"), System.Drawing.Image)
+        Me.btnSettings.Location = New System.Drawing.Point(1412, 68)
+        Me.btnSettings.Name = "btnSettings"
+        Me.btnSettings.Size = New System.Drawing.Size(45, 45)
+        Me.btnSettings.TabIndex = 87
+        Me.btnSettings.UseVisualStyleBackColor = False
+        '
         'frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1469, 885)
+        Me.Controls.Add(Me.btnSettings)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ltvRecords)
         Me.Controls.Add(Me.btnCancelSearch)
         Me.Controls.Add(Me.cboSearch)
@@ -566,4 +591,6 @@ Partial Class frmCustomer
     Friend WithEvents colEmail As ColumnHeader
     Friend WithEvents Address1 As ColumnHeader
     Friend WithEvents Address2 As ColumnHeader
+    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSettings As Button
 End Class

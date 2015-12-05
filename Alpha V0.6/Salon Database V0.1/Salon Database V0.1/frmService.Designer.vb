@@ -59,6 +59,7 @@ Partial Class frmService
         Me.colPrice = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnSettings = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -469,12 +470,25 @@ Partial Class frmService
         Me.colDescription.Text = "Description"
         Me.colDescription.Width = 222
         '
+        'btnSettings
+        '
+        Me.btnSettings.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
+        Me.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSettings.ForeColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
+        Me.btnSettings.Image = CType(resources.GetObject("btnSettings.Image"), System.Drawing.Image)
+        Me.btnSettings.Location = New System.Drawing.Point(1412, 68)
+        Me.btnSettings.Name = "btnSettings"
+        Me.btnSettings.Size = New System.Drawing.Size(45, 45)
+        Me.btnSettings.TabIndex = 97
+        Me.btnSettings.UseVisualStyleBackColor = False
+        '
         'frmService
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1469, 885)
+        Me.Controls.Add(Me.btnSettings)
         Me.Controls.Add(Me.ltvRecords)
         Me.Controls.Add(Me.btnCancelSearch)
         Me.Controls.Add(Me.cboSearch)
@@ -541,4 +555,5 @@ Partial Class frmService
     Friend WithEvents colPrice As ColumnHeader
     Friend WithEvents colName As ColumnHeader
     Friend WithEvents colDescription As ColumnHeader
+    Friend WithEvents btnSettings As Button
 End Class

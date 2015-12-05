@@ -121,6 +121,12 @@
     <Compile Include="frmServiceEdit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSettings.Designer.vb">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUnsavedAlert.Designer.vb">
       <DependentUpon>frmUnsavedAlert.vb</DependentUpon>
     </Compile>
@@ -179,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmServiceEdit.resx">
       <DependentUpon>frmServiceEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSettings.resx">
+      <DependentUpon>frmSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUnsavedAlert.resx">
       <DependentUpon>frmUnsavedAlert.vb</DependentUpon>

@@ -24,7 +24,7 @@ Partial Class frmAppointmentEdit
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAppointmentEdit))
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtComment = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnClearServ4 = New System.Windows.Forms.Button()
         Me.btnClearServ3 = New System.Windows.Forms.Button()
@@ -59,7 +59,7 @@ Partial Class frmAppointmentEdit
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(145, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.TextBox1)
+        Me.Panel1.Controls.Add(Me.txtComment)
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.lblRecordID)
@@ -76,16 +76,16 @@ Partial Class frmAppointmentEdit
         Me.Panel1.Size = New System.Drawing.Size(929, 493)
         Me.Panel1.TabIndex = 1
         '
-        'TextBox1
+        'txtComment
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
-        Me.TextBox1.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.SystemColors.Info
-        Me.TextBox1.Location = New System.Drawing.Point(554, 267)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(342, 104)
-        Me.TextBox1.TabIndex = 101
+        Me.txtComment.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(18, Byte), Integer), CType(CType(98, Byte), Integer))
+        Me.txtComment.Font = New System.Drawing.Font("HelveticaNeueLT Pro 55 Roman", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtComment.ForeColor = System.Drawing.SystemColors.Info
+        Me.txtComment.Location = New System.Drawing.Point(554, 267)
+        Me.txtComment.Multiline = True
+        Me.txtComment.Name = "txtComment"
+        Me.txtComment.Size = New System.Drawing.Size(342, 104)
+        Me.txtComment.TabIndex = 101
         '
         'GroupBox2
         '
@@ -450,6 +450,6 @@ Partial Class frmAppointmentEdit
     Friend WithEvents ltvCustName As ListView
     Friend WithEvents ColName As ColumnHeader
     Friend WithEvents txtCustName As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtComment As TextBox
     Friend WithEvents Label3 As Label
 End Class

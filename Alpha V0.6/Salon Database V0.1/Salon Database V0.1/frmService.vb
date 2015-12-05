@@ -3,6 +3,8 @@ Imports System.IO
 
 Public Class frmService
 
+    Dim ltvNoChange As Boolean = False
+
     Private Sub frmCustomer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         FileOpen(2, ServiceFilePath, OpenMode.Random, , , Len(ServiceRecord))
@@ -11,7 +13,7 @@ Public Class frmService
 
         UpdateRecords()
 
-        If System.IO.File.Exists(IDFileName) = True Then    'check if ID file exists, if not make one
+        If System.IO.File.Exists(IDFileName) Then    'check if ID file exists, if not make one
 
             Using Sreader As StreamReader = New StreamReader(IDFileName)
                 ServiceMaxID = Sreader.ReadLine
@@ -25,8 +27,15 @@ Public Class frmService
             End Using
 
         End If
-
+        RefreshScheme()
         cboSearch.SelectedIndex = 0
+
+        If ltvRecords.Items.Count <> 0 Then
+            ltvNoChange = True
+            ltvRecords.Items(0).Selected = True
+            ltvNoChange = False
+            ltvRecords.Focus()
+        End If
 
     End Sub
 
@@ -161,11 +170,11 @@ Public Class frmService
 
     Private Sub frmCustomer_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged
 
-        If ReturnAction <> "delete" Then
+        If ReturnAction <> "delete" And ReturnAction <> "scheme" Then
 
             Dim TempText As String = ""
 
-            If Me.Enabled = True Then
+            If Me.Enabled Then
 
                 lblTotalRecords.Text = LOF(2) / Len(ServiceRecord)
                 btnDelete.Enabled = False
@@ -187,7 +196,8 @@ Public Class frmService
 
             ReturnAction = ""
             DeleteRecord()
-
+        ElseIf ReturnAction = "scheme"
+            RefreshScheme()
         End If
 
     End Sub
@@ -213,34 +223,28 @@ Public Class frmService
 
                 Case "Search Name"
                     DisplayRecords("n", SearchString)
+                    ltvNoChange = True
+                    If ltvRecords.Items.Count <> 0 Then
+                        ltvRecords.Items(CurrentSerRNum - 1).Selected = True
+                    End If
+                    ltvNoChange = False
 
             End Select
 
         Else
             DisplayRecords("x", "")
+            ltvNoChange = True
+            If ltvRecords.Items.Count <> 0 Then
+                ltvRecords.Items(CurrentSerRNum - 1).Selected = True
+            End If
+            ltvNoChange = False
+            ltvRecords.Focus()
         End If
 
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Application.Exit()
-    End Sub
-
-
-    Private Sub lstRecords_KeyUp(sender As Object, e As KeyEventArgs)
-
-        Select Case e.KeyCode
-
-            Case Keys.Enter
-                btnEdit.PerformClick()
-                e.Handled = False
-
-            Case Keys.Delete
-                btnDelete.PerformClick()
-                e.Handled = False
-
-        End Select
-
     End Sub
 
     Private Sub btnCustomerForm_Click(sender As Object, e As EventArgs) Handles btnCustomerForm.Click
@@ -263,15 +267,111 @@ Public Class frmService
 
     End Sub
 
+    Private Sub RefreshScheme()
+
+        Select Case Scheme
+            Case "d"
+                SetScheme(Color.FromArgb(255, 33, 33, 33), Color.FromArgb(255, 48, 48, 48), Color.FromArgb(255, 66, 66, 66), Color.Black)
+            Case "p"
+                SetScheme(Color.FromArgb(255, 61, 37, 124), Color.FromArgb(255, 40, 18, 98), Color.FromArgb(255, 40, 18, 98), Color.FromArgb(255, 83, 59, 145))
+            Case Else
+                SetSchemeWhite(Color.FromArgb(255, 245, 245, 245), Color.FromArgb(255, 250, 250, 250), Color.FromArgb(255, 250, 250, 250), Color.FromArgb(255, 224, 224, 224))
+        End Select
+
+    End Sub
+
+    Private Sub SetScheme(ByVal Color1 As Color, ByVal Color2 As Color, ByVal Color3 As Color, ByVal Color4 As Color)
+        For Each Ctrl As Control In Me.Controls
+            Me.BackColor = Color4
+            Ctrl.BackColor = Color1
+            Ctrl.ForeColor = Color.White
+            If TypeOf Ctrl Is Button Then
+                Ctrl.BackColor = Color4
+                Ctrl.ForeColor = Color4
+            ElseIf TypeOf Ctrl Is Label
+                Ctrl.BackColor = Color4
+            ElseIf TypeOf Ctrl Is TextBox Or TypeOf Ctrl Is ComboBox
+                Ctrl.BackColor = Color2
+            ElseIf TypeOf Ctrl Is Panel
+                For Each Ctrol As Control In Ctrl.Controls
+                    Ctrol.ForeColor = Color.White
+                    If TypeOf Ctrol Is Button Then
+                        Ctrol.BackColor = Color1
+                        Ctrol.ForeColor = Color1
+                    ElseIf TypeOf Ctrol Is Label
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is TextBox Or TypeOf Ctrol Is ComboBox
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is Panel
+                        Ctrol.BackColor = Color3
+                        For Each Cntrol As Control In Ctrol.Controls
+                            Cntrol.ForeColor = Color.White
+                            If TypeOf Cntrol Is Button Or TypeOf Cntrol Is PictureBox Then
+                                Cntrol.BackColor = Color3
+                                Cntrol.ForeColor = Color3
+                            End If
+                        Next
+                    End If
+                Next
+            ElseIf TypeOf Ctrl Is ListView
+                If Scheme = "p" Then
+                    Ctrl.BackColor = Color.FromArgb(255, 40, 18, 98)
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub SetSchemeWhite(ByVal Color1 As Color, ByVal Color2 As Color, ByVal Color3 As Color, ByVal Color4 As Color)
+        For Each Ctrl As Control In Me.Controls
+            Me.BackColor = Color4
+            Ctrl.BackColor = Color1
+            Ctrl.ForeColor = Color.Black
+            If TypeOf Ctrl Is Button Then
+                Ctrl.BackColor = Color.DarkGray
+                Ctrl.ForeColor = Color.Black
+            ElseIf TypeOf Ctrl Is Label
+                Ctrl.BackColor = Color4
+            ElseIf TypeOf Ctrl Is TextBox Or TypeOf Ctrl Is ComboBox
+                Ctrl.BackColor = Color2
+            ElseIf TypeOf Ctrl Is Panel
+                For Each Ctrol As Control In Ctrl.Controls
+                    Ctrol.ForeColor = Color.Black
+                    If TypeOf Ctrol Is Button Then
+                        Ctrol.BackColor = Color.DarkGray
+                        Ctrol.ForeColor = Color.Black
+                    ElseIf TypeOf Ctrol Is Label
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is TextBox Or TypeOf Ctrol Is ComboBox
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is Panel
+                        Ctrol.BackColor = Color.FromArgb(255, 210, 210, 210)
+                        For Each Cntrol As Control In Ctrol.Controls
+                            Cntrol.ForeColor = Color.Black
+                            If TypeOf Cntrol Is Button Or TypeOf Cntrol Is PictureBox Then
+                                Cntrol.BackColor = Color.DarkGray
+                                Cntrol.ForeColor = Color.Black
+                            End If
+                        Next
+                    End If
+                Next
+            ElseIf TypeOf Ctrl Is ListView
+                Ctrl.BackColor = Color.FromArgb(255, 215, 215, 215)
+            End If
+        Next
+    End Sub
+
     Private Sub cboSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearch.SelectedIndexChanged
         txtSearchItem.Text = ""
         txtSearchItem.Focus()
     End Sub
 
     Private Sub ltvRecords_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles ltvRecords.ItemSelectionChanged
-        If e.IsSelected = True Then
-            lblCurrentRecord.Text = Val(ltvRecords.FocusedItem.Text)
-            ReadRecord()
+        If e.IsSelected Then
+            If Not ltvNoChange Then
+                lblCurrentRecord.Text = Val(ltvRecords.FocusedItem.Text)
+                ReadRecord()
+            End If
         End If
     End Sub
 
@@ -279,6 +379,12 @@ Public Class frmService
         FileClose(2)
         frmReports.Show()
         Me.Close()
+    End Sub
+
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+        CallingForm = Me
+        frmSettings.Show()
+        Me.Enabled = False
     End Sub
 
 End Class

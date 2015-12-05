@@ -4,16 +4,12 @@ Imports System.IO
 Public Class frmServiceEdit
 
     Private Sub frmServiceEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        RefreshScheme()
         If Editing = True Then
-
             lblCurrentRecord.Text = CurrentSerRNum
             ReadRecord()
-
         Else
-
             lblCurrentRecord.Text = LOF(2) / Len(ServiceRecord) + 1
-
         End If
 
     End Sub
@@ -146,6 +142,105 @@ Public Class frmServiceEdit
 
         End If
 
+    End Sub
+
+    Private Sub RefreshScheme()
+
+        Select Case Scheme
+            Case "d"
+                SetScheme(Color.FromArgb(255, 33, 33, 33), Color.FromArgb(255, 48, 48, 48), Color.FromArgb(255, 66, 66, 66), Color.Black)
+            Case "p"
+                SetScheme(Color.FromArgb(255, 61, 37, 124), Color.FromArgb(255, 40, 18, 98), Color.FromArgb(255, 40, 18, 98), Color.FromArgb(255, 83, 59, 145))
+            Case Else
+                SetSchemeWhite(Color.FromArgb(255, 245, 245, 245), Color.FromArgb(255, 250, 250, 250), Color.FromArgb(255, 250, 250, 250), Color.FromArgb(255, 224, 224, 224))
+        End Select
+
+    End Sub
+
+    Private Sub SetScheme(ByVal Color1 As Color, ByVal Color2 As Color, ByVal Color3 As Color, ByVal Color4 As Color)
+        For Each Ctrl As Control In Me.Controls
+            Me.BackColor = Color4
+            Ctrl.BackColor = Color1
+            Ctrl.ForeColor = Color.White
+            If TypeOf Ctrl Is Button Then
+                Ctrl.BackColor = Color4
+                Ctrl.ForeColor = Color4
+            ElseIf TypeOf Ctrl Is Label
+                Ctrl.BackColor = Color4
+            ElseIf TypeOf Ctrl Is TextBox Or TypeOf Ctrl Is ComboBox
+                Ctrl.BackColor = Color2
+            ElseIf TypeOf Ctrl Is Panel Or TypeOf Ctrl Is GroupBox
+                For Each Ctrol As Control In Ctrl.Controls
+                    Ctrol.ForeColor = Color.White
+                    If TypeOf Ctrol Is Button Then
+                        Ctrol.BackColor = Color1
+                        Ctrol.ForeColor = Color1
+                    ElseIf TypeOf Ctrol Is Label
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is TextBox Or TypeOf Ctrol Is ComboBox Or TypeOf Ctrol Is NumericUpDown
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is Panel Or TypeOf Ctrol Is GroupBox
+                        Ctrol.BackColor = Color3
+                        For Each Cntrol As Control In Ctrol.Controls
+                            Cntrol.ForeColor = Color.White
+                            If TypeOf Cntrol Is Button Or TypeOf Cntrol Is PictureBox Then
+                                Cntrol.BackColor = Color3
+                                Cntrol.ForeColor = Color3
+                            ElseIf TypeOf Cntrol Is TextBox Or TypeOf Cntrol Is ComboBox Or TypeOf Cntrol Is NumericUpDown
+                                Cntrol.BackColor = Color1
+                            ElseIf TypeOf Cntrol Is ListView
+                                If Scheme = "d" Then
+                                    Cntrol.BackColor = Color1
+                                End If
+                            End If
+                        Next
+                    End If
+
+                Next
+
+            End If
+        Next
+    End Sub
+
+    Private Sub SetSchemeWhite(ByVal Color1 As Color, ByVal Color2 As Color, ByVal Color3 As Color, ByVal Color4 As Color)
+        For Each Ctrl As Control In Me.Controls
+            Me.BackColor = Color4
+            Ctrl.BackColor = Color1
+            Ctrl.ForeColor = Color.Black
+            If TypeOf Ctrl Is Button Then
+                Ctrl.BackColor = Color.DarkGray
+                Ctrl.ForeColor = Color.Black
+            ElseIf TypeOf Ctrl Is Label
+                Ctrl.BackColor = Color4
+            ElseIf TypeOf Ctrl Is TextBox Or TypeOf Ctrl Is ComboBox
+                Ctrl.BackColor = Color2
+            ElseIf TypeOf Ctrl Is Panel Or TypeOf Ctrl Is GroupBox
+                For Each Ctrol As Control In Ctrl.Controls
+                    Ctrol.ForeColor = Color.Black
+                    If TypeOf Ctrol Is Button Then
+                        Ctrol.BackColor = Color.DarkGray
+                        Ctrol.ForeColor = Color.Black
+                    ElseIf TypeOf Ctrol Is Label
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is TextBox Or TypeOf Ctrol Is ComboBox Or TypeOf Ctrol Is NumericUpDown
+                        Ctrol.BackColor = Color1
+                    ElseIf TypeOf Ctrol Is Panel Or TypeOf Ctrol Is GroupBox
+                        Ctrol.BackColor = Color.FromArgb(255, 210, 210, 210)
+                        For Each Cntrol As Control In Ctrol.Controls
+                            Cntrol.ForeColor = Color.Black
+                            If TypeOf Cntrol Is Button Or TypeOf Cntrol Is PictureBox Then
+                                Cntrol.BackColor = Color.DarkGray
+                                Cntrol.ForeColor = Color.Black
+                            ElseIf TypeOf Cntrol Is TextBox Or TypeOf Cntrol Is ComboBox Or TypeOf Cntrol Is NumericUpDown
+                                Cntrol.BackColor = Color1
+                            ElseIf TypeOf Cntrol Is ListView
+                                Cntrol.BackColor = Color.FromArgb(255, 215, 215, 215)
+                            End If
+                        Next
+                    End If
+                Next
+            End If
+        Next
     End Sub
 
 End Class
