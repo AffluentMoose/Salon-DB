@@ -72,13 +72,14 @@ Public Class frmCustomerEdit
                 CustMaxID += 1
                 Using Swriter As StreamWriter = New StreamWriter(IDFileName)
                     Swriter.WriteLine(CustMaxID)
+                    Swriter.WriteLine(AppMaxID)
                 End Using
 
             End If
 
             FilePut(1, CustomerRecord, CInt(lblCurrentRecord.Text)) 'Save the record
 
-            CurrentCustRNum = lblCurrentRecord.Text
+            'CurrentCustRNum = lblCurrentRecord.Text
             CloseEditForm()
 
         Else

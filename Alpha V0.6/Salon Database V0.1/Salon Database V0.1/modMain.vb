@@ -53,6 +53,14 @@ Module modMain
         <VBFixedString(1)> Dim RecordNumber As Integer 'Number 1-4 representing the combo box from which this record has been saved - used for overwriting records
     End Structure
 
+    Public Structure Settings
+        <VBFixedString(50)> Dim Password As String
+        <VBFixedString(1)> Dim Scheme As Char
+        <VBFixedString(1)> Dim FirstAccess As Char
+    End Structure
+
+    Public SettingsRecord As Settings
+
     Public MaxAppServiceRecordNumber As Integer
     Public AppSerRecord As AppService
     Public AppServFilePath As String = CurDir() & "\AppServiceFile.dat"
@@ -62,8 +70,11 @@ Module modMain
     Public Editing As Boolean ' used for customer edit form
     Public ItemProgress As Integer 'for printing
 
+    Public SetPassword As String
     Public Scheme As Char
-    Public SchemeFile As String = CurDir() & "\Scheme.txt" 'scheme file
+    'Public SchemeFile As String = CurDir() & "\Scheme.txt" 'scheme file
+    Public SettingsFilePath As String = CurDir() & "\Settings.dat" 'scheme file
+    Public PassCallingForm As Form
 
 End Module
 

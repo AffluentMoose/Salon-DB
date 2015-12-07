@@ -244,6 +244,11 @@ Public Class frmService
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        FileOpen(9, SettingsFilePath, OpenMode.Random, , , Len(SettingsRecord))
+        FileGet(9, SettingsRecord, 1)
+        SettingsRecord.Scheme = Scheme
+        FilePut(9, SettingsRecord, 1)
+        FileClose(9)
         Application.Exit()
     End Sub
 

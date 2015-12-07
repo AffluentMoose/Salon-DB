@@ -246,6 +246,7 @@ Public Class frmAppointmentEdit
 
             AppMaxID += 1
             Using Swriter As StreamWriter = New StreamWriter(IDFileName)
+                Swriter.WriteLine(CustMaxID)
                 Swriter.WriteLine(AppMaxID)
             End Using
 
@@ -335,22 +336,6 @@ Public Class frmAppointmentEdit
         FileClose(4)
         frmAppointment.Enabled = True
         Me.Close()
-    End Sub
-
-    Private Sub frmAppointmentEdit_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
-
-        Select Case e.KeyCode
-
-            Case Keys.Escape
-                btnCancel.PerformClick()
-                e.Handled = True
-
-            Case Keys.Enter
-                btnSave.PerformClick()
-                e.Handled = False
-
-        End Select
-
     End Sub
 
     Private Sub frmAppointmentEdit_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged

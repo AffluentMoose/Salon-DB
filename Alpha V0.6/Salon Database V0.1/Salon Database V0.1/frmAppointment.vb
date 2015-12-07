@@ -16,6 +16,7 @@ Public Class frmAppointment
         If System.IO.File.Exists(IDFileName) Then    'check if ID file exists, if not make one
 
             Using Sreader As StreamReader = New StreamReader(IDFileName)
+                Sreader.ReadLine()
                 AppMaxID = Sreader.ReadLine
             End Using
 
@@ -23,6 +24,7 @@ Public Class frmAppointment
 
             AppMaxID = 0
             Using Swriter As StreamWriter = New StreamWriter(IDFileName)
+                Swriter.WriteLine(CustMaxID)
                 Swriter.WriteLine(AppMaxID)
             End Using
 
@@ -355,6 +357,11 @@ Public Class frmAppointment
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        FileOpen(9, SettingsFilePath, OpenMode.Random, , , Len(SettingsRecord))
+        FileGet(9, SettingsRecord, 1)
+        SettingsRecord.Scheme = Scheme
+        FilePut(9, SettingsRecord, 1)
+        FileClose(9)
         Application.Exit()
     End Sub
 

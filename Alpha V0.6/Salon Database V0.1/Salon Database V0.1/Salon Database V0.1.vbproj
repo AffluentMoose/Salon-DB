@@ -103,6 +103,12 @@
     <Compile Include="frmAppointmentEdit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmReports.Designer.vb">
       <DependentUpon>frmReports.vb</DependentUpon>
     </Compile>
@@ -119,6 +125,12 @@
       <DependentUpon>frmServiceEdit.vb</DependentUpon>
     </Compile>
     <Compile Include="frmServiceEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetPassword.Designer.vb">
+      <DependentUpon>frmSetPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetPassword.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSettings.Designer.vb">
@@ -177,6 +189,9 @@
     <EmbeddedResource Include="frmAppointmentEdit.resx">
       <DependentUpon>frmAppointmentEdit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmReports.resx">
       <DependentUpon>frmReports.vb</DependentUpon>
     </EmbeddedResource>
@@ -185,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmServiceEdit.resx">
       <DependentUpon>frmServiceEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetPassword.resx">
+      <DependentUpon>frmSetPassword.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>

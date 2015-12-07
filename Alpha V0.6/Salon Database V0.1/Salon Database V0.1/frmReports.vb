@@ -1,4 +1,6 @@
-﻿Public Class frmReports
+﻿Imports System.IO
+
+Public Class frmReports
 
     Dim CustomerRecordsCount As Integer = 0
     Dim ServiceRecordsCount As Integer = 0
@@ -402,7 +404,7 @@
         ltvCustName.Items.Clear()
 
         For Each Customer In Customers
-            If (Trim(Customer.Forename) & " " & Trim(Customer.Surname)).Contains(SearchString) Then
+            If (Trim(Customer.Forename) & " " & Trim(Customer.Surname)).ToLower.Contains(SearchString.ToLower) Then
                 Dim Item As New ListViewItem(Trim(Customer.Forename) & " " & Trim(Customer.Surname), 0)
                 Item.SubItems.Add(Customer.ID)
                 ltvCustName.Items.Add(Item)
@@ -584,6 +586,10 @@
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        FileOpen(9, SettingsFilePath, OpenMode.Random, , , Len(SettingsRecord))
+        FileGet(9, SettingsRecord, 1)
+        SettingsRecord.Scheme = Scheme
+        FilePut(9, SettingsRecord, 1)
         Application.Exit()
     End Sub
 

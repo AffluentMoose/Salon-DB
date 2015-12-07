@@ -3,17 +3,15 @@ Imports System.IO
 
 Public Class frmCustomer
 
+    Dim CustomerRecordsCount As Integer = 0
+    Dim Customers As New List(Of Customer)
+    Dim CurrentRecord As Integer
     Dim ltvNoChange As Boolean = False
 
     Private Sub frmCustomer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        RefreshScheme()
-
         FileOpen(1, CustomerFilePath, OpenMode.Random, , , Len(CustomerRecord))
-
-        lblTotalRecords.Text = LOF(1) / Len(CustomerRecord)
-
-        UpdateRecords()
+        RefreshScheme()
 
         If System.IO.File.Exists(IDFileName) Then    'check if ID file exists, if not make one
             Using Sreader As StreamReader = New StreamReader(IDFileName)
@@ -28,6 +26,10 @@ Public Class frmCustomer
 
         cboSearch.SelectedIndex = 0
 
+        CurrentCustRNum = 0
+        UpdateRecords()
+        DisplayRecords("x", "")
+
         If ltvRecords.Items.Count <> 0 Then
             ltvNoChange = True
             ltvRecords.Items(0).Selected = True
@@ -39,17 +41,17 @@ Public Class frmCustomer
 
     Private Sub DisplayRecords(SearchType As Char, SearchString As String) 'takes in 2 parameters for searching records
 
-        Dim i As Integer
+        Dim i As Integer = 0
         ltvRecords.Items.Clear()
 
-        For i = 1 To LOF(1) / Len(CustomerRecord)
+        For Each Customer In Customers
 
-            FileGet(1, CustomerRecord, i)
+            'FileGet(1, CustomerRecord, i)
 
             Select Case SearchType
                 Case "n"
 
-                    Dim SearchedString As String = CustomerRecord.Forename & CustomerRecord.Surname
+                    Dim SearchedString As String = Customer.Forename & Customer.Surname
 
                     If SearchedString.ToLower.Contains(SearchString.ToLower) Then
                         DisplayCurrentRecord(i)
@@ -57,7 +59,7 @@ Public Class frmCustomer
 
                 Case "t"
 
-                    Dim SearchedString As String = CustomerRecord.Telephone
+                    Dim SearchedString As String = Customer.Telephone
 
                     If SearchedString.ToLower.Contains(SearchString.ToLower) Then
                         DisplayCurrentRecord(i)
@@ -65,7 +67,7 @@ Public Class frmCustomer
 
                 Case "e"
 
-                    Dim SearchedString As String = CustomerRecord.Email
+                    Dim SearchedString As String = Customer.Email
 
                     If SearchedString.ToLower.Contains(SearchString.ToLower) Then
                         DisplayCurrentRecord(i)
@@ -75,14 +77,14 @@ Public Class frmCustomer
                     DisplayCurrentRecord(i)
 
             End Select
-
-        Next i
+            i += 1
+        Next
 
     End Sub
 
     Private Sub DisplayCurrentRecord(ByVal i As Integer)
-        With CustomerRecord
-            Dim Item As New ListViewItem(i.ToString("D3"), 0)
+        With Customers(i)
+            Dim Item As New ListViewItem((i + 1).ToString("D3"), 0)
             Item.SubItems.Add(Trim(.Forename))
             Item.SubItems.Add(Trim(.Surname))
             Item.SubItems.Add(Trim(.Telephone))
@@ -95,8 +97,9 @@ Public Class frmCustomer
 
     Private Sub ReadRecord()
 
-        FileGet(1, CustomerRecord, CInt(lblCurrentRecord.Text))
-        lblCustomerName.Text = Trim(CustomerRecord.Forename) & " " & Trim(CustomerRecord.Surname)
+        'FileGet(1, CustomerRecord, CInt(lblCurrentRecord.Text))
+        'lblCustomerName.Text = Trim(CustomerRecord.Forename) & " " & Trim(CustomerRecord.Surname)
+        lblCustomerName.Text = Trim(Customers(CurrentCustRNum).Forename) & " " & Trim(Customers(CurrentCustRNum).Surname)
 
     End Sub
 
@@ -150,17 +153,23 @@ Public Class frmCustomer
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
 
-        Editing = True
-        CurrentCustRNum = CInt(lblCurrentRecord.Text)
-        frmCustomerEdit.Show()
-        Me.Enabled = False
+        If ltvRecords.SelectedItems.Count > 0 Then
+            CurrentRecord = ltvRecords.SelectedItems(0).Index
+            Editing = True
+            CurrentCustRNum += 1
+            frmCustomerEdit.Show()
+            Me.Enabled = False
+        End If
 
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
 
+        If ltvRecords.SelectedItems.Count > 0 Then
+            CurrentRecord = ltvRecords.SelectedItems(0).Index
+        End If
         Editing = False
-        CurrentCustRNum = CInt(lblCurrentRecord.Text)
+        CurrentCustRNum += 1
         frmCustomerEdit.Show()
         Me.Enabled = False
 
@@ -176,18 +185,24 @@ Public Class frmCustomer
 
     Private Sub UpdateRecords()
 
+        Customers.Clear()
+        For i = 1 To LOF(1) / Len(CustomerRecord)
+            FileGet(1, CustomerRecord, i)
+            Customers.Add(CustomerRecord)
+        Next
+        CustomerRecordsCount = Customers.Count - 1
+
+        lblTotalRecords.Text = CustomerRecordsCount + 1
         btnDelete.Enabled = False
         btnEdit.Enabled = False
-        lblCurrentRecord.Text = 0
+        lblCurrentRecord.Text = CurrentCustRNum
 
-        If lblTotalRecords.Text > 0 Then
+        If CustomerRecordsCount > 0 Then
             lblCurrentRecord.Text = 1
             btnEdit.Enabled = True
             btnDelete.Enabled = True
             ReadRecord()
         End If
-
-        DisplayRecords("x", "")
 
     End Sub
 
@@ -195,24 +210,21 @@ Public Class frmCustomer
 
         If ReturnAction <> "delete" And ReturnAction <> "scheme" Then
 
-            Dim TempText As String = ""
-
             If Me.Enabled Then
-
-                lblTotalRecords.Text = LOF(1) / Len(CustomerRecord)
-                btnDelete.Enabled = False
-                btnEdit.Enabled = False
-
-                If lblTotalRecords.Text > 0 Then
-
-                    lblCurrentRecord.Text = CurrentCustRNum
-                    btnEdit.Enabled = True
-                    btnDelete.Enabled = True
-                    ReadRecord()
-                    SearchRecords()
-
+                Dim TempCustNumber As Integer = CurrentCustRNum - 1
+                CurrentCustRNum = TempCustNumber
+                UpdateRecords()
+                DisplayRecords("x", "")
+                SearchRecords()
+                CurrentCustRNum = TempCustNumber
+                ltvNoChange = True
+                If ltvRecords.Items.Count <> 0 Then
+                    ltvRecords.Items(CurrentRecord).Selected = True
                 End If
-
+                ltvNoChange = False
+                lblCurrentRecord.Text = CurrentCustRNum + 1
+                ReadRecord()
+                ltvRecords.Focus()
             End If
 
         ElseIf ReturnAction = "delete"
@@ -242,47 +254,61 @@ Public Class frmCustomer
 
         If Trim(txtSearchItem.Text) <> "" Then
 
-            CurrentCustRNum = 1
+            CurrentCustRNum = 0
 
             Select Case cboSearch.Text
 
                 Case "Search Name"
                     DisplayRecords("n", SearchString)
-                    ltvNoChange = True
-                    If ltvRecords.Items.Count <> 0 Then
-                        ltvRecords.Items(CurrentCustRNum - 1).Selected = True
-                    End If
-                    ltvNoChange = False
+                    SelectCorrectRecord()
                 Case "Search Telephone"
                     DisplayRecords("t", SearchString)
-                    ltvNoChange = True
-                    If ltvRecords.Items.Count <> 0 Then
-                        ltvRecords.Items(CurrentCustRNum - 1).Selected = True
-                    End If
-                    ltvNoChange = False
+                    SelectCorrectRecord()
                 Case "Search Email"
                     DisplayRecords("e", SearchString)
-                    ltvNoChange = True
-                    If ltvRecords.Items.Count <> 0 Then
-                        ltvRecords.Items(CurrentCustRNum - 1).Selected = True
-                    End If
-                    ltvNoChange = False
-
+                    SelectCorrectRecord()
             End Select
 
         Else
             DisplayRecords("x", "")
-            ltvNoChange = True
-            If ltvRecords.Items.Count <> 0 Then
-                ltvRecords.Items(CurrentCustRNum - 1).Selected = True
-            End If
-            ltvNoChange = False
-            ltvRecords.Focus()
+            SelectCorrectRecord()
         End If
+
+        ltvNoChange = True
+        If ltvRecords.Items.Count <> 0 Then
+            ltvRecords.Items(0).Selected = True
+            CurrentCustRNum = Val(ltvRecords.Items(0).Text) - 1
+        End If
+        ltvNoChange = False
+        ReadRecord()
+        lblCurrentRecord.Text = CurrentCustRNum + 1
 
     End Sub
 
+    Private Sub SelectCorrectRecord()
+        ltvNoChange = True
+        If ltvRecords.Items.Count <> 0 Then
+            ltvRecords.Items(CurrentCustRNum).Selected = True
+        End If
+        ltvNoChange = False
+    End Sub
+
+    Private Sub ltvRecords_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles ltvRecords.ItemSelectionChanged
+        If e.IsSelected Then
+            If Not ltvNoChange Then
+                CurrentCustRNum = Val(ltvRecords.FocusedItem.Text) - 1
+                lblCurrentRecord.Text = CurrentCustRNum + 1
+                ReadRecord()
+            End If
+        End If
+    End Sub
+
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        FileOpen(9, SettingsFilePath, OpenMode.Random, , , Len(SettingsRecord))
+        FileGet(9, SettingsRecord, 1)
+        SettingsRecord.Scheme = Scheme
+        FilePut(9, SettingsRecord, 1)
+        FileClose(9)
         Application.Exit()
     End Sub
 
@@ -315,15 +341,6 @@ Public Class frmCustomer
         FileClose(1)
         frmReports.Show()
         Me.Close()
-    End Sub
-
-    Private Sub ltvRecords_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles ltvRecords.ItemSelectionChanged
-        If e.IsSelected Then
-            If Not ltvNoChange Then
-                lblCurrentRecord.Text = Val(ltvRecords.FocusedItem.Text)
-                ReadRecord()
-            End If
-        End If
     End Sub
 
     Private Sub RefreshScheme()
@@ -418,10 +435,6 @@ Public Class frmCustomer
                 Ctrl.BackColor = Color.FromArgb(255, 215, 215, 215)
             End If
         Next
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-        SetScheme(Color.FromArgb(255, 33, 33, 33), Color.FromArgb(255, 48, 48, 48), Color.FromArgb(255, 66, 66, 66), Color.Black)
     End Sub
 
     Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
